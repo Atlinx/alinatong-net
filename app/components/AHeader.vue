@@ -32,7 +32,7 @@ function close_menu() {
 
         <button
           type="button"
-          class="sm:hidden inline-flex h-10 w-10 items-center justify-center text-primary relative z-20"
+          class="sm:hidden inline-flex h-10 w-10 items-center justify-center text-primary relative z-50"
           :aria-expanded="is_menu_open"
           aria-label="Toggle menu"
           @click="is_menu_open = !is_menu_open"
