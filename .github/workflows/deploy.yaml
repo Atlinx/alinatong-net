@@ -14,8 +14,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "24"
-          cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      - run: pnpm rebuild better-sqlite3
       - run: npx nuxt build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
