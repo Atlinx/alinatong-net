@@ -78,56 +78,63 @@
         </template>
         <img
           v-if="project.logo"
-          class="w-12 h-12 object-contain"
+          class="w-12 h-12 object-contain hidden sm:block"
           :src="project.logo"
         />
         <div class="flex flex-col grow">
-          <div class="flex flex-col md:flex-row mb-2 gap-2">
-            <div class="flex flex-col items-start">
-              <div class="mb-1 flex flex-col">
-                <div>
+          <div class="flex flex-row flex-nowrap">
+            <img
+              v-if="project.logo"
+              class="w-12 h-12 object-contain mr-4 sm:hidden"
+              :src="project.logo"
+            />
+            <div class="flex flex-col md:flex-row mb-2 gap-2">
+              <div class="flex flex-col items-start">
+                <div class="mb-1 flex flex-col">
+                  <div>
+                    <h2
+                      class="highlight-text"
+                    >
+                      {{ project.name }}
+                    </h2>
+                  </div>
                   <h2
-                    class="highlight-text"
+                    v-if="project.authors" class="inline font-normal"
+                    v-html="project.authors"
                   >
-                    {{ project.name }}
+                  </h2>
+                  <h2
+                    v-if="project.venue" class="inline italic text-primary font-medium"
+                  >
+                    {{ project.venue }}
+                  </h2>
+                  <h2
+                    v-if="project.subtitle" class="inline italic text-primary font-medium"
+                  >
+                    {{ project.subtitle }}
                   </h2>
                 </div>
-                <h2
-                  v-if="project.authors" class="inline font-normal"
-                  v-html="project.authors"
-                >
-                </h2>
-                <h2
-                  v-if="project.venue" class="inline italic text-primary font-medium"
-                >
-                  {{ project.venue }}
-                </h2>
-                <h2
-                  v-if="project.subtitle" class="inline italic text-primary font-medium"
-                >
-                  {{ project.subtitle }}
-                </h2>
+                <div class="flex flex-row gap-4" v-if="project.links">
+                  <a
+                    target="_blank"
+                    :href="link[1]"
+                    v-for="link in (Object.entries(project.links) as any as [string, string])"
+                    :key="link[0]"
+                    class="flex flex-row flex-nowrap items-center gap-1"
+                    >
+                    <span>
+                      {{ link[0] }}
+                    </span>
+                    <Icon :name="link_icon_name(link[0])" size="18"/>
+                  </a>
+                </div>
               </div>
-              <div class="flex flex-row gap-4" v-if="project.links">
-                <a
-                  target="_blank"
-                  :href="link[1]"
-                  v-for="link in (Object.entries(project.links) as any as [string, string])"
-                  :key="link[0]"
-                  class="flex flex-row flex-nowrap items-center gap-1"
-                  >
-                  <span>
-                    {{ link[0] }}
-                  </span>
-                  <Icon :name="link_icon_name(link[0])" size="18"/>
-                </a>
-              </div>
+              <p
+                class="text-primary font-medium grow text-left md:text-right md:mb-0 whitespace-nowrap"
+              >
+                {{ project.date }}
+              </p>
             </div>
-            <p
-              class="text-primary font-medium grow text-left md:text-right md:mb-0 whitespace-nowrap"
-            >
-              {{ project.date }}
-            </p>
           </div>
           <template v-if="project.desc">
             <ul v-if="Array.isArray(project.desc)">

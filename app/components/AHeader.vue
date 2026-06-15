@@ -14,12 +14,12 @@ function close_menu() {
 </script>
 
 <template>
-  <header class="w-full p-2 px-8 md:px-16 sticky top-0 left-0 right-0 z-30 bg-bg flex justify-center">
+  <header class="w-full p-2 px-8 md:px-16 sticky top-0 left-0 right-0 z-10 bg-bg flex justify-center">
     <div class="w-full max-w-4xl">
       <div class="flex items-center justify-between gap-4">
         <a class="font-bebas text-3xl text-primary leading-none" href="#top" @click="close_menu">alina tong</a>
 
-        <nav class="hidden sm:flex items-center gap-6 text-3xl font-bebas">
+        <nav class="hidden sm:flex items-center gap-6">
           <a
             v-for="item in menu_items"
             :key="item.href"
@@ -32,7 +32,7 @@ function close_menu() {
 
         <button
           type="button"
-          class="sm:hidden inline-flex h-10 w-10 items-center justify-center text-primary relative z-40"
+          class="sm:hidden inline-flex h-10 w-10 items-center justify-center text-primary relative z-20"
           :aria-expanded="is_menu_open"
           aria-label="Toggle menu"
           @click="is_menu_open = !is_menu_open"
@@ -73,7 +73,7 @@ function close_menu() {
       >
         <nav
           v-if="is_menu_open"
-          class="sm:hidden fixed right-0 top-0 bottom-0 z-20 w-72 max-w-[85vw] bg-bg px-6 py-20"
+          class="sm:hidden fixed right-0 top-0 bottom-0 w-72 max-w-[85vw] bg-bg px-6 py-20"
         >
           <div class="flex flex-col gap-2 text-5xl font-bebas">
             <a

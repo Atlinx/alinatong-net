@@ -3,3 +3,14 @@ allowBuilds:
   better-sqlite3: true
   esbuild: true
   sharp: true
+publicHoistPattern:
+  - remark-gfm
+  - remark-emoji
+  - remark-mdc
+  - remark-rehype
+  - rehype-raw
+  - parse5
+  - unist-util-visit
+  - unified
+  - debug
+  - extend
