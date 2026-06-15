@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const email_address = useState("email_address", () => "");
 function reveal_email() {
-  email_address.value = atob("YWxpbmF0QGVuZ2luZWVyaW5nLnVwZW5uLmVkdQ==");
+  email_address.value = atob("YWxpbmF0QHNlYXMudXBlbm4uZWR1");
 }
 const last_updated = new Date("2026-6-15 12:08 PM EST")
 </script>
@@ -14,16 +14,16 @@ const last_updated = new Date("2026-6-15 12:08 PM EST")
           <h1 class="inline-block font-bebas text-6xl sm:text-8xl text-primary">
             alina tong
           </h1>
-          <div class="flex gap-2">
-            <a target="_blank" href="https://github.com/atlinx">github</a>
-            <a target="_blank" href="https://linkedin.com/in/alinatong">linkedin</a>
+          <div class="flex gap-4">
+            <a target="_blank" href="https://github.com/atlinx" class="icon-btn">github <Icon name="mdi:github" /> </a>
+            <a target="_blank" href="https://linkedin.com/in/alinatong" class="icon-btn">linkedin <Icon name="mdi:linkedin" /> </a>
           </div>
           <p>
             I am an incoming MS Robotics student at the University of Pennsylvania. 
             Prior to that I was a research assistant for Professor Bekris'
             <a target="_blank" href="https://pracsys.cs.rutgers.edu/">Pracsys Lab</a>
             at Rutgers. I'm interested in robot learning, including
-            reinforcement learning and imitation learning. I also do a little
+            VLAs, reinforcement learning, and imitation learning. I also do a little
             bit of
             <a target="_blank" href="https://fracturalstudios.com/">game development</a>
             in my free time. You can contact me through the email listed below.

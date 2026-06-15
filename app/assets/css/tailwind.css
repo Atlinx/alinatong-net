@@ -43,7 +43,7 @@
   --color-primary: var(--color-pink-600);
   --color-bg: var(--color-white);
   --color-fg: var(--color-grey-950);
-  --color-fg-muted: #a6a6a6;
+  --color-fg-muted: #bbbbbb;
 }
 
 @source inline("object-{top,center,bottom,left,right}");
@@ -69,16 +69,16 @@ ol {
   @apply inline font-bold bg-primary p-1 text-bg box-decoration-clone;
 }
 
-.primary-text {
-  @apply text-primary;
+.icon-btn {
+  @apply flex flex-row flex-nowrap items-center gap-1;
 }
 
 .bg-stripes {
   background: repeating-linear-gradient(
     -45deg,
-    theme(colors.grey.300),
-    theme(colors.grey.300) 16px,
-    theme(colors.grey.200) 16px,
-    theme(colors.grey.200) 32px
+    theme(colors.bg),
+    theme(colors.bg) 16px,
+    theme(colors.fg.muted) 16px,
+    theme(colors.fg.muted) 32px
   );
 }

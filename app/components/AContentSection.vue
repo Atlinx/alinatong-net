@@ -8,10 +8,8 @@
   const { data: projects } = await useAsyncData(props.collection, () => {
     return queryCollection(props.collection as any).all();
   });
-  function item_has_preview(item: any) {
-    return item.preview
-  }
-  function file_type(file: String) {
+  function file_type(file: string | undefined) {
+    if (!file) return "none";
     const VIDEO_EXT = ["mp4", "webm", "ogg"] 
     const extension = file.split(".").slice(-1)[0] || ""
     if (VIDEO_EXT.includes(extension)) {
@@ -63,18 +61,16 @@
             preload="auto"
             loop
           />
-          <template v-if="!item_has_preview(project)">
-            <div
-              class="w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 sm:aspect-square border-solid border border-grey-300 opacity-50 bg-stripes sm:block"
-              :class="{'hidden': !item_has_preview(project)}"
-              v-if="props.preview == 'show_stripes'"
-            ></div>
-            <div
-              class="w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 sm:aspect-square sm:block"
-              :class="{'hidden': !item_has_preview(project)}"
-              v-if="props.preview == 'show_empty'"
-            ></div>
-          </template>
+          <div
+            class="max-sm:hidden w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 sm:aspect-square border-solid border border-grey-300 opacity-50 bg-stripes"
+            :class="{'hidden': file_type(project.preview) != 'none'}"
+            v-if="props.preview == 'show_stripes'"
+          > </div>
+          <div
+            class="max-sm:hidden w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 sm:aspect-square"
+            :class="{'hidden': file_type(project.preview) != 'none'}"
+            v-if="props.preview == 'show_empty'"
+          ></div>
         </template>
         <img
           v-if="project.logo"
@@ -120,7 +116,7 @@
                     :href="link[1]"
                     v-for="link in (Object.entries(project.links) as any as [string, string])"
                     :key="link[0]"
-                    class="flex flex-row flex-nowrap items-center gap-1"
+                    class="icon-btn"
                     >
                     <span>
                       {{ link[0] }}

@@ -15,11 +15,11 @@ export default defineNuxtConfig({
     head: {
       title: "Alina Tong",
       meta: [
-        { name: "description", content: "Personal website of Alina Tong." },
+        { name: "description", content: "I'm an incoming UPenn MS Robotics student and former research assistant for Prof. Bekris' Pracsys Lab. I'm passionate about robot learning, including VLAs, RL, and imitation learning." },
         { property: "og:title", content: "Alina Tong's Website" },
         {
           property: "og:description",
-          content: "Personal website of Alina Tong.",
+          content: "I'm an incoming UPenn MS Robotics student and former research assistant for Prof. Bekris' Pracsys Lab. I'm passionate about robot learning, including VLAs, RL, and imitation learning.",
         },
         {
           property: "og:image",
