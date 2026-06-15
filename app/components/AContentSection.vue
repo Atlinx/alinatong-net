@@ -88,9 +88,9 @@
               class="w-12 h-12 object-contain mr-4 sm:hidden"
               :src="project.logo"
             />
-            <div class="flex flex-col md:flex-row mb-2 gap-2">
+            <div class="flex flex-col md:flex-row mb-2 gap-y-1 gap-x-4 w-full">
               <div class="flex flex-col items-start">
-                <div class="mb-1 flex flex-col">
+                <div class="flex flex-col">
                   <div>
                     <h2
                       class="highlight-text"
@@ -114,7 +114,7 @@
                     {{ project.subtitle }}
                   </h2>
                 </div>
-                <div class="flex flex-row gap-4" v-if="project.links">
+                <div class="flex flex-row gap-4 mt-1" v-if="project.links">
                   <a
                     target="_blank"
                     :href="link[1]"
