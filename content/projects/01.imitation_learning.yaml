@@ -4,7 +4,7 @@ preview: /videos/gello.mp4
 preview_classes: object-bottom
 date: Summer 2025
 links:
-  github: github.com/Atlinx/pracsys_imitation_learning_ws
+  github: https://github.com/Atlinx/pracsys_imitation_learning_ws
 desc:
   - Built imitation learning infrastructure in Python and ROS Noetic to train and test robot policies on the UR5e and Motoman SDA10F robots
   - Used MuJoCo to test and train robots in simulation
