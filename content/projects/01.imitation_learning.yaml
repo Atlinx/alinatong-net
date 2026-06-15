@@ -1,0 +1,14 @@
+name: Imitation Learning Pipeline
+subtitle: PRACSYS Lab
+preview: /videos/gello.mp4
+preview_classes: object-bottom
+date: Summer 2025
+links:
+  github: github.com/Atlinx/pracsys_imitation_learning_ws
+desc:
+  - Built imitation learning infrastructure in Python and ROS Noetic to train and test robot policies on the UR5e and Motoman SDA10F robots
+  - Used MuJoCo to test and train robots in simulation
+  - Built automated object placement and scene generation tooling for domain randomization
+  - Built keyboard teleoperation with inverse kinematics and set up GELLO teleoperation framework
+  - Built a data-collection system that saves human demonstrations as LeRobot datasets
+  - Collected demonstrations to fine-tune the pi-0 VLA model for the UR5e

@@ -1,0 +1,10 @@
+name: Research Assistant
+subtitle: PRACSYS Lab, Rutgers University
+date: Spring 2025 - Present
+logo: /images/pracsys.jpg
+links:
+  website: https://wordpress.cs.rutgers.edu/pracsys-cs-rutgers-edu/
+desc:
+  - Worked with a PhD student on an Imitation Learning project, building software infrastructure
+  - Worked with a PhD student on a VLM task-planning paper
+  - Presented a talk on our imitation learning infrastructure to group of 20+ students and faculty

@@ -1,0 +1,9 @@
+name: ILOC Instruction Scheduler
+subtitle: CS415 Compilers Project
+preview: /videos/iloc_scheduler.mp4
+preview_classes: object-right
+date: Spring 2025
+links:
+  demo: https://ru-cs-415-iloc-scheduler.vercel.app/
+desc:
+  - Built bottom-up compiler IR instruction scheduler in React, NextJS, with a D3.js visualization of the instruction dependency graph, deployed on Vercel

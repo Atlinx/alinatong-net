@@ -1,0 +1,11 @@
+name: Neural Network From Scratch
+date: Spring 2024
+preview: /videos/mlp_mnist.webm
+preview_classes: object-left
+subtitle: CS440 Intro to AI Project
+links:
+  github: https://github.com/Atlinx/RU-CS440/tree/main/assignment_4
+desc:
+  - Built a feed-forward neural network from scratch using Rust
+  - Trained model to classify digits from the MNIST dataset and ascii faces, and achieved accuracy of 90.57%
+  - Evaluated and summarized performance of neural network in a 8-page Latex report

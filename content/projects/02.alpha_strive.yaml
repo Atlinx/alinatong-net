@@ -1,0 +1,10 @@
+name: Alpha Strive
+subtitle: Personal Project
+preview: /videos/alpha_strive.mp4
+preview_classes: object-right
+date: May 2025
+desc:
+  - Side-project to learn reinforcement/imitation learning by applying techniques to the fighting game Guilty Gear Strive
+  - Reverse engineered the compiled game code and built a C++ frontend to interact with the video game logic and a Python backend to run the AI model and control the training
+  - Trained a DQN model to play the game, using PyTorch and Numpy
+  - Scraped replay data of matches and trained a behavioral-cloned model to play the game

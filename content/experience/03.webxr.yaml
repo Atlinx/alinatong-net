@@ -1,0 +1,9 @@
+name: WebXR Developer
+subtitle: Rutgers Bloustein School of Planning and Public Policy
+date: Summer 2023
+logo: /svgs/rutgers.svg
+links:
+  project: https://flowingtogether.lambertvillenj.org/
+desc:
+  - Led development in a team of two to build six interactive AR sites for the NJ city of Lambertville's "Flowing Together" walking tour, using AFrame and ThreeJS
+  - Hosted AR sites on a website built using Vuejs and Nuxt, serving 900+ monthly users

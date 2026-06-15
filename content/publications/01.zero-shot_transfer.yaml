@@ -1,0 +1,8 @@
+name: Zero-shot Transfer of Learned Composed Skills for Targeted Retrieval from Cluttered Shelves
+authors: Joe Doerr, <b>Alina Tong</b>, Aakash Madisetty, Mihir Chanduka, Rohan Karamel, and Kostas Bekris
+venue: In-Progress
+preview: /images/zero-shot_transfer.png
+date: 2026
+desc: |
+  We're developing a novel policy training method that searches through multiple learned RL policies
+  using MCTS to generate expert trajectories. Expert demonstrations are distilled into a point-cloud task-planner and low-level policies.

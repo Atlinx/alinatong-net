@@ -1,0 +1,11 @@
+name: Associate Software Developer
+subtitle: LightRiver Software
+date: Summer 2024
+logo: /images/light_river.webp
+desc:
+  - Worked in a team of 8 on a full-stack single-paged dashboard web-app for monitoring and analyzing fiber-optic networks, using D3, VueJS, Fastify, Prisma, and Postgres
+  - Built and deployed migration CLI that can create, track, and apply migrations in production databases
+  - Optimized line graph SQL query to run x50 faster
+  - Dockerized backend databases for easier local testing
+  - Scripted a build-system for backend API + developer tools, used in a GitHub actions CI/CD workflow
+  - Built a simulation CLI tool that generates 1k+ entries for spiked alarm trend DB data to demo dashboards to customers

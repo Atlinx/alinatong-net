@@ -1,0 +1,12 @@
+name: Transfer Learning in Sentiment Analysis
+subtitle: CS439 Intro to Data Science Project
+date: Spring 2025
+preview: /images/steam_reviews.png
+preview_classes: object-top-left
+links:
+  github: https://github.com/Atlinx/BERT-TLSA-paper
+desc:
+  - Final project for CS439 to identify the efficacy of transfer learning in sentiment analysis
+  - Conducted literature review of sentiment analysis, learning about lexicons, Naive Bayes, parts-of-speech tagging, aspect-based sentiment analysis, sentence + document sentence-level sentiment analysis
+  - Scraped data from review platforms (Steam, IMDB, Metacritic) and fine-tuned the BERT models to predict review ratings from text
+  - Compared performance of the generalist model trained on all data against specialized models trained solely on each platform in a 7-page Latex report

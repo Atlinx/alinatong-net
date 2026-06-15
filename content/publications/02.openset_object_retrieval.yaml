@@ -1,0 +1,12 @@
+name: Open-Set Object Retrieval in Clutter via Hybrid Vision-Language and Geometric Reasoning
+authors: Daniel Nakhimovich, Joe Doerr, Kevin Chen, <b>Alina Tong</b>, Bowen Wen, Kostas Bekris
+venue: Under Review
+preview: /videos/openset_object_retreival.webm
+date: 2026
+links:
+  paper: https://2026vlmtaskplanningclutter.github.io/paper.pdf
+  website: https://2026vlmtaskplanningclutter.github.io/
+desc: |
+  We present hybrid VLM + dependency graph-based task-planner, 
+  and demonstrate its effectiveness in open-set object retrieval in clutter. 
+  Evaluated on real and simulated environments.

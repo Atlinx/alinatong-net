@@ -1,0 +1,11 @@
+name: A* Simulation
+subtitle: CS440 Intro to AI Project
+preview: /videos/astar_maze.webm
+preview_classes: object-left
+date: Spring 2024
+links:
+  github: https://github.com/Atlinx/RU-CS440/tree/main/assignment_1
+desc:
+  - Built a simulation for an agent pathfinding through a 2D maze using variations of the A* algorithm in Rust
+  - Evaluated and summarized performance of algorithms in a 6-page Latex report
+  - Designed a two-tailed t-test for evaluating the difference between Repeated Forward A* and Repeated Backward A*
