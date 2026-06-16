@@ -58,6 +58,7 @@
             muted
             draggable="false"
             playsinline
+            disablePictureInPicture
             preload="auto"
             loop
           />

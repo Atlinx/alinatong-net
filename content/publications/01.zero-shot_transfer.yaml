@@ -1,7 +1,7 @@
 name: Zero-shot Transfer of Learned Composed Skills for Targeted Retrieval from Cluttered Shelves
 authors: Joe Doerr, <b>Alina Tong</b>, Aakash Madisetty, Mihir Chanduka, Rohan Karamel, and Kostas Bekris
 venue: In-Progress
-preview: /images/zero-shot_transfer.png
+preview: /images/zero-shot_transfer.webp
 date: 2026
 desc: |
   We're developing a novel policy training method that searches through multiple learned RL policies
