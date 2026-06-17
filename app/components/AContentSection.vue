@@ -8,16 +8,6 @@
   const { data: projects } = await useAsyncData(props.collection, () => {
     return queryCollection(props.collection as any).all();
   });
-  function file_type(file: string | undefined) {
-    if (!file) return "none";
-    const VIDEO_EXT = ["mp4", "webm", "ogg"] 
-    const extension = file.split(".").slice(-1)[0] || ""
-    if (VIDEO_EXT.includes(extension)) {
-      return "video"
-    } else {
-      return "image"
-    }
-  }
   function link_icon_name(link_name: string | undefined) {
     const ICON_MAP: Record<string, string> = {
       "github": "mdi:github",
@@ -42,37 +32,10 @@
         v-for="project in projects"
         :key="project.id"
       >
-        <template v-if="props.preview != 'none'">
-          <img
-            class="w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 object-cover border-solid border border-primary bg-primary"
-            :class="{[project.preview_classes]: true}"
-            :src="project.preview"
-            v-if="file_type(project.preview) == 'image'"
-          />
-          <video
-            class="w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 object-cover border-solid border border-primary bg-primary"
-            :class="{[project.preview_classes]: true}"
-            :src="project.preview"
-            v-if="file_type(project.preview) == 'video'"
-            autoplay
-            muted
-            draggable="false"
-            playsinline
-            disablePictureInPicture
-            preload="auto"
-            loop
-          />
-          <div
-            class="max-sm:hidden w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 sm:aspect-square border-solid border border-grey-300 opacity-50 bg-stripes"
-            :class="{'hidden': file_type(project.preview) != 'none'}"
-            v-if="props.preview == 'show_stripes'"
-          > </div>
-          <div
-            class="max-sm:hidden w-full aspect-video max-w-100 sm:max-w-none sm:w-48 md:w-64 sm:min-h-64 sm:aspect-square"
-            :class="{'hidden': file_type(project.preview) != 'none'}"
-            v-if="props.preview == 'show_empty'"
-          ></div>
-        </template>
+        <APreview
+          :preview="project.preview"
+          :mode="props.preview"
+        />
         <img
           v-if="project.logo"
           class="w-12 h-12 object-contain hidden sm:block"
@@ -88,42 +51,40 @@
             <div class="flex flex-col md:flex-row mb-2 gap-y-1 gap-x-4 w-full">
               <div class="flex flex-col items-start">
                 <div class="flex flex-col">
-                  <div>
-                    <h2
-                      class="highlight-text"
-                    >
+                  <h2>
+                    <span class="highlight-text">
                       {{ project.name }}
-                    </h2>
-                  </div>
-                  <h2
+                    </span>
+                  </h2>
+                  <h3
                     v-if="project.authors" class="inline font-normal"
                     v-html="project.authors"
                   >
-                  </h2>
-                  <h2
+                  </h3>
+                  <h3
                     v-if="project.venue" class="inline italic text-primary font-medium"
                   >
                     {{ project.venue }}
-                  </h2>
-                  <h2
+                  </h3>
+                  <h3
                     v-if="project.subtitle" class="inline italic text-primary font-medium"
                   >
                     {{ project.subtitle }}
-                  </h2>
+                  </h3>
                 </div>
                 <div class="flex flex-row gap-4 mt-1" v-if="project.links">
-                  <a
+                  <NuxtLink
                     target="_blank"
-                    :href="link[1]"
+                    :to="link[1]"
                     v-for="link in (Object.entries(project.links) as any as [string, string])"
                     :key="link[0]"
-                    class="icon-btn"
+                    class="link icon-btn"
                     >
                     <span>
                       {{ link[0] }}
                     </span>
                     <Icon :name="link_icon_name(link[0])" size="18"/>
-                  </a>
+                  </NuxtLink>
                 </div>
               </div>
               <p

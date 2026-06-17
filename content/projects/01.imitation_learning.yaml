@@ -1,7 +1,8 @@
 name: Imitation Learning Pipeline
 subtitle: PRACSYS Lab
-preview: /videos/gello.mp4
-preview_classes: object-bottom
+preview:
+  src: /videos/gello.mp4
+  media_classes: object-bottom
 date: Summer 2025
 links:
   github: https://github.com/Atlinx/pracsys_imitation_learning_ws

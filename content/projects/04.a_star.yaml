@@ -1,7 +1,8 @@
 name: A* Simulation
 subtitle: CS440 Intro to AI Project
-preview: /videos/astar_maze.webm
-preview_classes: object-left
+preview:
+  src: /videos/astar_maze.webm
+  media_classes: object-left
 date: Spring 2024
 links:
   github: https://github.com/Atlinx/RU-CS440/tree/main/assignment_1

@@ -7,13 +7,7 @@
   --font-cascadia: "Cascadia Code", "sans-serif";
   
   --breakpoint-xs: 30rem;
-
-  --max-w-90: calc(var(--spacing) * 120);
-  --max-w-100: calc(var(--spacing) * 120);
-  --max-w-110: calc(var(--spacing) * 120);
-  --max-w-120: calc(var(--spacing) * 120);
-  --max-w-128: calc(var(--spacing) * 120);
-
+  
   --color-pink-50: #fff0f3;
   --color-pink-100: #ffe4ea;
   --color-pink-200: #ffc9d6;
@@ -41,17 +35,15 @@
   --color-grey-950: #202330;
 
   --color-primary: var(--color-pink-600);
-  --color-bg: var(--color-white);
-  --color-fg: var(--color-grey-950);
-  --color-fg-muted: #bbbbbb;
+  --color-secondary-100: #e6e6e6;
+  --color-secondary-150: #d6d6d6;
+  --color-secondary-200: #bbbbbb;
+  --color-secondary-300: #75757a;
+  --color-secondary-400: #202330;
 }
 
-@source inline("object-{top,center,bottom,left,right}");
-@source inline("object-{top,bottom}-{left,right}");
+@source "../../../content/**/*";
 
-a {
-  @apply underline text-primary hover:bg-primary hover:text-bg font-medium;
-}
 
 ul {
   @apply ml-8 list-outside list-disc;
@@ -61,24 +53,62 @@ ol {
   @apply ml-8 list-outside list-decimal;
 }
 
+.link {
+  @apply underline text-primary hover:bg-primary hover:text-secondary-100 font-medium px-1;
+}
+
 .btn {
-  @apply no-underline outline outline-1 px-2 text-primary hover:bg-primary hover:text-bg font-medium;
+  @apply no-underline outline outline-1 px-2 text-primary hover:bg-primary hover:text-secondary-100 font-medium;
 }
 
 .highlight-text {
-  @apply inline font-bold bg-primary p-1 text-bg box-decoration-clone;
+  @apply inline font-bold bg-primary p-1 text-secondary-100 box-decoration-clone;
 }
 
 .icon-btn {
-  @apply flex flex-row flex-nowrap items-center gap-1;
+  @apply flex flex-row flex-nowrap items-center gap-1 px-1;
+}
+
+.tag-outline {
+  @apply text-xs text-primary outline-1 outline-primary rounded-full px-2 py-0.5;
 }
 
 .bg-stripes {
   background: repeating-linear-gradient(
     -45deg,
-    theme(colors.bg),
-    theme(colors.bg) 16px,
-    theme(colors.fg.muted) 16px,
-    theme(colors.fg.muted) 32px
+    theme(colors.secondary-100),
+    theme(colors.secondary-100) 16px,
+    theme(colors.secondary-200) 16px,
+    theme(colors.secondary-200) 32px
   );
+}
+
+.content-renderer {
+  h1 {
+    @apply font-bebas text-5xl text-primary mb-2 mt-6;
+  }
+
+  p:has(+ p) {
+    @apply mb-4;
+  }
+  
+  h2 {
+    @apply font-bebas text-4xl text-primary mb-2 mt-6;
+  }
+  
+  h3 {
+    @apply font-bebas text-3xl text-primary mb-2 mt-6;
+  }
+  
+  h4 {
+    @apply font-bebas text-2xl text-primary mt-4;
+  }
+
+  blockquote {
+    @apply border-l-4 border-primary pl-4 py-2 italic my-6;
+  }
+
+  pre {
+    @apply bg-secondary-400 p-4 rounded overflow-x-auto my-6;
+  }
 }

@@ -1,7 +1,8 @@
 name: Alpha Strive
 subtitle: Personal Project
-preview: /videos/alpha_strive.mp4
-preview_classes: object-right
+preview:
+  src: /videos/alpha_strive.mp4
+  media_classes: object-right
 date: May 2025
 desc:
   - Side-project to learn reinforcement/imitation learning by applying techniques to the fighting game Guilty Gear Strive

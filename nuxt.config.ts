@@ -50,6 +50,9 @@ export default defineNuxtConfig({
   css: ["~/assets/css/tailwind.css"],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['atlinx.net']
+    }
   },
   icon: {
     mode: 'svg',
@@ -58,5 +61,29 @@ export default defineNuxtConfig({
     defaults: {
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     },
+  },
+  router: {
+    options: {
+      scrollBehaviorType: "smooth"
+    }
+  },
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: "monokai",
+          langs: [
+            "c",
+            "cpp",
+            "rust",
+            "python",
+            "html",
+            "css",
+            "javascript",
+            "typescript"
+          ]
+        }
+      }
+    }
   },
 });
