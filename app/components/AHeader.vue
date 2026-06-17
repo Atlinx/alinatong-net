@@ -19,7 +19,7 @@ function close_menu() {
   <header class="w-full p-2 px-8 md:px-16 sticky top-0 left-0 right-0 z-10 bg-secondary-100 flex justify-center">
     <div class="w-full max-w-4xl">
       <div class="flex items-center justify-between gap-4">
-        <NuxtLink class="link font-bebas text-3xl text-primary leading-none" to="/" @click="close_menu">alina tong</NuxtLink>
+        <NuxtLink class="link font-league-gothic text-3xl text-primary leading-none" to="/" @click="close_menu">alina tong</NuxtLink>
 
         <nav class="hidden md:flex items-center gap-6">
           <NuxtLink
@@ -86,7 +86,7 @@ function close_menu() {
           v-if="is_menu_open"
           class="md:hidden fixed right-0 top-0 -bottom-20 w-72 max-w-[85vw] bg-secondary-100 px-6 py-20"
         >
-          <div class="flex flex-col gap-2 text-5xl font-bebas">
+          <div class="flex flex-col gap-2 text-5xl font-league-gothic">
             <NuxtLink
               v-for="item in menu_items"
               :key="item.label"

@@ -10,7 +10,7 @@ const last_updated = new Date("2026-6-15 12:08 PM EST")
     <div class="flex flex-col gap-16">
         <div class="flex flex-col gap-8 sm:flex-row sm:max-w-full">
             <div class="sm:grow flex flex-col gap-2 items-start">
-                <h1 class="inline-block font-bebas text-6xl sm:text-8xl text-primary">
+                <h1 class="inline-block font-league-gothic text-6xl sm:text-8xl text-primary">
                     alina tong
                 </h1>
                 <div class="flex gap-4">
@@ -36,8 +36,8 @@ const last_updated = new Date("2026-6-15 12:08 PM EST")
                     <p>{{ email_address }}</p>
                 </div>
             </div>
-            <img class="aspect-square max-w-full xs:max-w-sm sm:max-w-none sm:h-80 sm:w-60 md:h-80 md:w-80 object-cover max-sm:object-[100%_40%] border border-primary bg-primary"
-                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" />
+            <NuxtImg class="aspect-square max-w-full xs:max-w-sm sm:max-w-none sm:h-80 sm:w-60 md:h-80 md:w-80 object-cover max-sm:object-[100%_40%] border border-primary bg-primary text-secondary-100"
+                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" loading="lazy" />
         </div>
         <section id="publications" class="scroll-mt-24">
             <AContentSection collection="publications" preview="show_stripes" />

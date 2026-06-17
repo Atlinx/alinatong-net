@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-bebas: "League Gothic", "sans-serif";
-  --font-lekton: "Lekton", "sans-serif";
+  --font-league-gothic: "League Gothic", "sans-serif";
   --font-ubuntu: "Ubuntu", "sans-serif";
-  --font-cascadia: "Cascadia Code", "sans-serif";
   
   --breakpoint-xs: 30rem;
   
@@ -85,7 +83,7 @@ ol {
 
 .content-renderer {
   h1 {
-    @apply font-bebas text-5xl text-primary mb-2 mt-6;
+    @apply font-league-gothic text-5xl text-primary mb-2 mt-6;
   }
 
   p:has(+ p) {
@@ -93,15 +91,15 @@ ol {
   }
   
   h2 {
-    @apply font-bebas text-4xl text-primary mb-2 mt-6;
+    @apply font-league-gothic text-4xl text-primary mb-2 mt-6;
   }
   
   h3 {
-    @apply font-bebas text-3xl text-primary mb-2 mt-6;
+    @apply font-league-gothic text-3xl text-primary mb-2 mt-6;
   }
   
   h4 {
-    @apply font-bebas text-2xl text-primary mt-4;
+    @apply font-league-gothic text-2xl text-primary mt-4;
   }
 
   blockquote {

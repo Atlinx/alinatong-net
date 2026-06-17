@@ -32,7 +32,7 @@ watchEffect(() => {
     </div>
     <article>
       <header class="mb-8 block">
-        <h2 class="font-bebas text-6xl mb-2 text-primary ">{{ article.title }}</h2>
+        <h2 class="font-league-gothic text-6xl mb-2 text-primary ">{{ article.title }}</h2>
         <p v-if="article.description" class="text-primary mb-2">{{ article.description }}</p>
         <time v-if="article.date" class="tag-outline">{{ article.date }}</time>
       </header>

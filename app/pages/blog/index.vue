@@ -8,7 +8,7 @@ return queryCollection("blog").all();
 <template>
     <div class="flex flex-col gap-16 w-full">
         <div class="flex flex-col gap-8">
-            <h1 class="inline-block font-bebas text-6xl sm:text-8xl text-primary">
+            <h1 class="inline-block font-league-gothic text-6xl sm:text-8xl text-primary">
                 blog
             </h1>
             <p>

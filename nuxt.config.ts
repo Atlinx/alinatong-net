@@ -65,7 +65,7 @@ export default defineNuxtConfig({
   },
   fonts: {
     defaults: {
-      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      preload: true,
     },
   },
   router: {

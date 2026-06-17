@@ -48,7 +48,7 @@ const fileType = computed<FileType>(() => {
 
 const hasPreview = computed(() => fileType.value !== "none")
 
-const handleError = (e: Event) => {
+const handleError = (e: string | Event) => {
   emit("error", e)
 }
 </script>
@@ -65,9 +65,9 @@ const handleError = (e: Event) => {
     :aria-label="previewAlt"
   >
     <!-- Image -->
-    <img
+    <NuxtImg
       v-if="fileType === 'image'"
-      class="w-full h-full object-cover border border-primary bg-primary"
+      class="w-full h-full object-cover border border-primary bg-primary text-secondary-100"
       :class="previewMediaClasses"
       :src="previewSrc"
       loading="lazy"

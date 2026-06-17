@@ -23,7 +23,7 @@
 
 <template>
   <div>
-    <h2 class="inline-block font-bebas text-5xl mb-4 text-primary">
+    <h2 class="inline-block font-league-gothic text-5xl mb-4 text-primary">
       {{  (props.header ?? props.collection) }}
     </h2>
     <div class="flex flex-col gap-16 sm:gap-8">
@@ -36,17 +36,19 @@
           :preview="project.preview"
           :mode="props.preview"
         />
-        <img
+        <NuxtImg
           v-if="project.logo"
           class="w-12 h-12 object-contain hidden sm:block"
           :src="project.logo"
+          loading="lazy"
         />
         <div class="flex flex-col grow">
           <div class="flex flex-row flex-nowrap">
-            <img
+            <NuxtImg
               v-if="project.logo"
               class="w-12 h-12 object-contain mr-4 sm:hidden"
               :src="project.logo"
+              loading="lazy"
             />
             <div class="flex flex-col md:flex-row mb-2 gap-y-1 gap-x-4 w-full">
               <div class="flex flex-col items-start">
