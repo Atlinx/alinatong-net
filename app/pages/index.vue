@@ -37,7 +37,7 @@ const last_updated = new Date("2026-6-15 12:08 PM EST")
                 </div>
             </div>
             <NuxtImg class="aspect-square max-w-full xs:max-w-sm sm:max-w-none sm:h-80 sm:w-60 md:h-80 md:w-80 object-cover max-sm:object-[100%_40%] border border-primary bg-primary text-secondary-100"
-                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" loading="lazy" />
+                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" preload />
         </div>
         <section id="publications" class="scroll-mt-24">
             <AContentSection collection="publications" preview="show_stripes" />
