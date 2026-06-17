@@ -21,7 +21,7 @@ function close_menu() {
       <div class="flex items-center justify-between gap-4">
         <NuxtLink class="link font-bebas text-3xl text-primary leading-none" to="/" @click="close_menu">alina tong</NuxtLink>
 
-        <nav class="hidden sm:flex items-center gap-6">
+        <nav class="hidden md:flex items-center gap-6">
           <NuxtLink
             v-for="item in menu_items"
             :key="item.label"
@@ -34,7 +34,7 @@ function close_menu() {
 
         <button
           type="button"
-          class="sm:hidden inline-flex h-10 w-10 items-center justify-center text-primary relative z-20"
+          class="md:hidden inline-flex h-10 w-10 items-center justify-center text-primary relative z-20"
           :aria-expanded="is_menu_open"
           aria-label="Toggle menu"
           @click="is_menu_open = !is_menu_open"
@@ -68,7 +68,7 @@ function close_menu() {
         <button
           v-if="is_menu_open"
           type="button"
-          class="sm:hidden fixed inset-0 -bottom-20 bg-black/40"
+          class="md:hidden fixed inset-0 -bottom-20 bg-black/40"
           aria-label="Close menu"
           @click="close_menu"
         />
@@ -84,7 +84,7 @@ function close_menu() {
       >
         <nav
           v-if="is_menu_open"
-          class="sm:hidden fixed right-0 top-0 -bottom-20 w-72 max-w-[85vw] bg-secondary-100 px-6 py-20"
+          class="md:hidden fixed right-0 top-0 -bottom-20 w-72 max-w-[85vw] bg-secondary-100 px-6 py-20"
         >
           <div class="flex flex-col gap-2 text-5xl font-bebas">
             <NuxtLink
