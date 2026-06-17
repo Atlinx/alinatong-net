@@ -19,16 +19,18 @@
     "@nuxt/icon": "2.2.3",
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/color-mode": "^4.0.1",
-    "@tailwindcss/vite": "^4.3.1",
+    "@unocss/reset": "^66.7.2",
     "better-sqlite3": "^12.10.1",
     "color-mode": "0.1.0",
     "nuxt": "^4.4.8",
-    "tailwindcss": "^4.3.1",
     "vue": "^3.5.38",
     "vue-router": "^5.1.0"
   },
   "packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620",
   "devDependencies": {
-    "@iconify-json/mdi": "^1.2.3"
+    "@iconify-json/mdi": "^1.2.3",
+    "@unocss/nuxt": "^66.7.2",
+    "@unocss/preset-wind4": "^66.7.2",
+    "unocss": "^66.7.2"
   }
 }

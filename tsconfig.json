@@ -14,5 +14,8 @@
     {
       "path": "./.nuxt/tsconfig.node.json"
     }
+  ],
+  "include": [
+    "uno.config.ts"
   ]
 }

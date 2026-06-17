@@ -1,5 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -10,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@nuxt/content",
     "@nuxt/icon",
+    "@unocss/nuxt"
   ],
   app: {
     head: {
@@ -47,9 +46,8 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
-  css: ["~/assets/css/tailwind.css"],
+  css: ["~/assets/css/common.css"],
   vite: {
-    plugins: [tailwindcss()],
     server: {
       allowedHosts: ['atlinx.net']
     }
@@ -67,6 +65,20 @@ export default defineNuxtConfig({
     defaults: {
       preload: true,
     },
+    families: [
+      {
+        name: "League Gothic",
+        provider: "google",
+        weight: 400,
+        subsets: ["latin"]
+      },
+      {
+        name: "Ubuntu Sans",
+        provider: "google",
+        weights: [400, 500, 700],
+        subsets: ["latin"]
+      },
+    ],
   },
   router: {
     options: {
