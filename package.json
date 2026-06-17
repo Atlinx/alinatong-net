@@ -9,6 +9,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "gh_pages": "nuxt build --preset github_pages",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

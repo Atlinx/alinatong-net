@@ -11,13 +11,13 @@
   function link_icon_name(link_name: string | undefined) {
     const ICON_MAP: Record<string, string> = {
       "github": "mdi:github",
-      "linkedin": "lucide:linkedin",
+      "linkedin": "mdi:linkedin",
       "paper": "mdi:paper",
-      "website": "lucide:link"
+      "website": "mdi:link"
     }
     if (link_name && ICON_MAP[link_name])
       return ICON_MAP[link_name]
-    return "lucide:arrow-up-right"
+    return "mdi:arrow-top-right"
   }
 </script>
 

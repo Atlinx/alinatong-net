@@ -56,6 +56,12 @@ export default defineNuxtConfig({
   },
   icon: {
     mode: 'svg',
+    clientBundle: {
+      icons: [
+        "mdi:arrow-left",
+        "mdi:arrow-top-right"
+      ]
+    }
   },
   fonts: {
     defaults: {
