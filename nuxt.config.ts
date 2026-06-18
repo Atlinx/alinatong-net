@@ -65,6 +65,7 @@ export default defineNuxtConfig({
       icons: [
         "mdi:arrow-left",
         "mdi:arrow-top-right",
+        "mdi:arrow-top"
       ]
     }
   },
