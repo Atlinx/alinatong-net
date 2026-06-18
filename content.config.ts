@@ -34,13 +34,14 @@ export default defineContentConfig({
         name: z.string(),
         date: z.string(),
         logo: z.optional(z.string()),
+        logo_alt: z.optional(z.string()),
         majors: z.array(z.string()),
         awards: z.array(z.string()),
       }),
     }),
-    publications: defineCollection({
+    research: defineCollection({
       type: 'data',
-      source: 'publications/**/*.yaml',
+      source: 'research/**/*.yaml',
       schema: z.object({
         name: z.string(),
         date: z.string(),
@@ -73,6 +74,7 @@ export default defineContentConfig({
         preview: z.optional(previewSchema),
         links: z.optional(z.map(z.string(), z.string())),
         logo: z.optional(z.string()),
+        logo_alt: z.optional(z.string()),
         desc: z.array(z.string())
       })
     })

@@ -14,10 +14,10 @@ const last_updated = new Date("2026-6-15 12:08 PM EST")
                     alina tong
                 </h1>
                 <div class="flex gap-4">
-                    <NuxtLink target="_blank" to="https://github.com/atlinx" class="link icon-btn">github
+                    <NuxtLink target="_blank" to="https://github.com/atlinx" class="link icon-btn" aria-label="Go to my Github page." >github
                         <Icon name="mdi:github" size="18"/>
                     </NuxtLink>
-                    <NuxtLink target="_blank" to="https://linkedin.com/in/alinatong" class="link icon-btn">linkedin
+                    <NuxtLink target="_blank" to="https://linkedin.com/in/alinatong" class="link icon-btn" aria-label="Go to my Linkedin page." >linkedin
                         <Icon name="mdi:linkedin" size="18"/>
                     </NuxtLink>
                 </div>
@@ -37,22 +37,22 @@ const last_updated = new Date("2026-6-15 12:08 PM EST")
                 </div>
             </div>
             <NuxtImg class="aspect-square max-w-full xs:max-w-sm sm:max-w-none sm:h-80 sm:w-60 md:h-80 md:w-80 object-cover max-sm:object-[100%_40%] border border-primary bg-primary text-secondary-100"
-                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" preload />
+                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" :preload="{ fetchPriority: 'high' }" densities="x1" />
         </div>
-        <section id="publications" class="scroll-mt-24">
-            <AContentSection collection="publications" preview="show_stripes" />
+        <section id="research" class="scroll-mt-24">
+            <AContentSection collection="research" preview="show_stripes" />
         </section>
         <section id="projects" class="scroll-mt-24">
             <AContentSection collection="projects" preview="show_stripes" />
         </section>
         <section id="experience" class="scroll-mt-24">
-            <AContentSection collection="experience" preview="none" />
+            <AContentSection collection="experience" preview="none" logo="always" />
         </section>
         <section id="education" class="scroll-mt-24">
-            <AContentSection collection="education" preview="none" />
+            <AContentSection collection="education" preview="none" logo="always" />
         </section>
 
-        <div class="mt-8 inline-flex flex-wrap text-secondary-200">
+        <div class="mt-8 inline-flex flex-wrap text-secondary-300">
             <p class="mr-10">Last Updated:</p>
             <p>{{ last_updated }}</p>
         </div>

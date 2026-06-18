@@ -6,7 +6,6 @@ type PreviewMode = "show_stripes" | "show_empty" | "none"
 type FileType = "image" | "video" | "none"
 
 const VIDEO_EXTENSIONS = ["mp4", "webm", "ogg"]
-const DEFAULT_PREVIEW_ALT = "Preview image/video"
 
 const props = withDefaults(defineProps<{
   preview?: PreviewValue
@@ -30,8 +29,8 @@ const previewSrc = computed(() => {
 
 const previewAlt = computed(() => {
   if (props.alt) return props.alt
-  if (typeof props.preview === "string") return DEFAULT_PREVIEW_ALT
-  return props.preview?.alt ?? DEFAULT_PREVIEW_ALT
+  if (typeof props.preview === "string") return "Preview image/video."
+  return props.preview?.alt ?? "Preview image/video."
 })
 
 const previewMediaClasses = computed(() => {
@@ -62,7 +61,6 @@ const handleError = (e: string | Event) => {
       }, 
       containerClasses
     ]"
-    :aria-label="previewAlt"
   >
     <!-- Image -->
     <NuxtImg
@@ -71,6 +69,7 @@ const handleError = (e: string | Event) => {
       :class="previewMediaClasses"
       :src="previewSrc"
       loading="lazy"
+      :alt="previewAlt"
       @error="handleError"
     />
 

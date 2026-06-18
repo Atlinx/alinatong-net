@@ -10,7 +10,12 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@nuxt/content",
     "@nuxt/icon",
+    "nuxt-booster"
   ],
+  colorMode: {
+    classSuffix: "",
+    dataValue: "theme"
+  },
   app: {
     head: {
       title: "Alina Tong",
@@ -47,7 +52,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
-  css: ["~/assets/css/tailwind.css"],
+  css: ["~/assets/css/tailwind.css", "katex/dist/katex.min.css"],
   vite: {
     plugins: [tailwindcss()],
     server: {
@@ -59,7 +64,7 @@ export default defineNuxtConfig({
     clientBundle: {
       icons: [
         "mdi:arrow-left",
-        "mdi:arrow-top-right"
+        "mdi:arrow-top-right",
       ]
     }
   },
@@ -76,6 +81,16 @@ export default defineNuxtConfig({
   content: {
     build: {
       markdown: {
+        toc: {
+          depth: 2,
+          searchDepth: 2
+        },
+        remarkPlugins: {
+          "remark-math": {},
+        },
+        rehypePlugins: {
+          "rehype-katex": {}
+        },
         highlight: {
           theme: "monokai",
           langs: [

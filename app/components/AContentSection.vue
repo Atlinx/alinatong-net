@@ -4,7 +4,8 @@
     header?: string,
     collection: string,
     preview?: "show_stripes" | "show_empty" | "none"
-  }>(), { preview: "show_stripes" })
+    logo?: "always" | "auto"
+  }>(), { preview: "show_stripes", logo: "auto" })
   const { data: projects } = await useAsyncData(props.collection, () => {
     return queryCollection(props.collection as any).all();
   });
@@ -38,16 +39,19 @@
         />
         <NuxtImg
           v-if="project.logo"
-          class="w-12 h-12 object-contain hidden sm:block"
+          class="size-12 shrink-0 object-contain hidden sm:block"
           :src="project.logo"
+          :alt="project.logo_alt ?? 'Logo.'"
           loading="lazy"
         />
+        <div v-else-if="props.logo === 'always'" class="size-12"></div>
         <div class="flex flex-col grow">
           <div class="flex flex-row flex-nowrap">
             <NuxtImg
               v-if="project.logo"
-              class="w-12 h-12 object-contain mr-4 sm:hidden"
+              class="size-12 shrink-0 object-contain mr-4 sm:hidden"
               :src="project.logo"
+              :alt="project.logo_alt ?? 'Logo.'"
               loading="lazy"
             />
             <div class="flex flex-col md:flex-row mb-2 gap-y-1 gap-x-4 w-full">
@@ -80,6 +84,7 @@
                     :to="link[1]"
                     v-for="link in (Object.entries(project.links) as any as [string, string])"
                     :key="link[0]"
+                    :aria-label="`Go to the ${link[0]} page for &quot;${project.name}&quot;.`"
                     class="link icon-btn"
                     >
                     <span>
@@ -97,7 +102,7 @@
             </div>
           </div>
           <template v-if="project.desc">
-            <ul v-if="Array.isArray(project.desc)">
+            <ul v-if="Array.isArray(project.desc)" class="ul">
               <li v-for="line in project.desc" v-html="line"></li>
             </ul>
             <p v-else class="ml-4" v-html="project.desc"></p>

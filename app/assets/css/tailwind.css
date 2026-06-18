@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-league-gothic: "League Gothic", "sans-serif";
-  --font-ubuntu: "Ubuntu", "sans-serif";
+  --font-league-gothic: "League Gothic", sans-serif;
+  --font-ubuntu: "Ubuntu", sans-serif;
   
   --breakpoint-xs: 30rem;
   
@@ -32,22 +32,93 @@
   --color-grey-900: #282b3b;
   --color-grey-950: #202330;
 
-  --color-primary: var(--color-pink-600);
+  --color-primary: #ed0074;
   --color-secondary-100: #e6e6e6;
   --color-secondary-150: #d6d6d6;
   --color-secondary-200: #bbbbbb;
   --color-secondary-300: #75757a;
   --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+}
+
+[data-theme="light"] {
+  --color-primary: #ed0074;
+  --color-secondary-100: #e6e6e6;
+  --color-secondary-150: #d6d6d6;
+  --color-secondary-200: #bbbbbb;
+  --color-secondary-300: #75757a;
+  --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+}
+
+[data-theme="dark"] {
+  --color-primary: #ff6798;
+  --color-secondary-100: #202330;
+  --color-secondary-150: #3c4156;
+  --color-secondary-200: #646c8c;
+  --color-secondary-300: #949ab5;
+  --color-secondary-400: #c9cbd9;
+  --color-codeblock: #282b3b;
+}
+
+[data-theme="b&w"] {
+  --color-primary: #202330;
+  --color-secondary-100: #e6e6e6;
+  --color-secondary-150: #d6d6d6;
+  --color-secondary-200: #bbbbbb;
+  --color-secondary-300: #5f5f63;
+  --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+}
+
+[data-theme="purple"] {
+  --color-primary: #d670d6;
+  --color-secondary-100: #202330;
+  --color-secondary-150: #3c4156;
+  --color-secondary-200: #646c8c;
+  --color-secondary-300: #949ab5;
+  --color-secondary-400: #c9cbd9;
+  --color-codeblock: #282b3b;
+}
+
+[data-theme="purple2"] {
+  --color-primary: #30202c;
+  --color-secondary-100: #ec9dec;
+  --color-secondary-150: #bbbbbb;
+  --color-secondary-200: #5f5f63;
+  --color-secondary-300: #202330;
+  --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+}
+
+[data-theme="arctic"] {
+  --color-primary: #46d0f3;
+  --color-secondary-100: #202330;
+  --color-secondary-150: #3c4156;
+  --color-secondary-200: #646c8c;
+  --color-secondary-300: #949ab5;
+  --color-secondary-400: #c9cbd9;
+  --color-codeblock: #282b3b;
+}
+
+[data-theme="sandstone"] {
+  --color-primary: #f49230;
+  --color-secondary-100: #352f2f;
+  --color-secondary-150: #574444;
+  --color-secondary-200: #8c6964;
+  --color-secondary-300: #b59c94;
+  --color-secondary-400: #d9c9c9;
+  --color-codeblock: #423939;
 }
 
 @source "../../../content/**/*";
 
 
-ul {
+.ul {
   @apply ml-8 list-outside list-disc;
 }
 
-ol {
+.ol {
   @apply ml-8 list-outside list-decimal;
 }
 
@@ -74,31 +145,39 @@ ol {
 .bg-stripes {
   background: repeating-linear-gradient(
     -45deg,
-    theme(colors.secondary-100),
-    theme(colors.secondary-100) 16px,
-    theme(colors.secondary-200) 16px,
-    theme(colors.secondary-200) 32px
+    var(--color-secondary-100),
+    var(--color-secondary-100) 16px,
+    var(--color-secondary-200) 16px,
+    var(--color-secondary-200) 32px
   );
 }
 
 .content-renderer {
-  h1 {
-    @apply font-league-gothic text-5xl text-primary mb-2 mt-6;
-  }
-
   p:has(+ p) {
     @apply mb-4;
   }
   
+  h1 {
+    @apply font-league-gothic text-6xl text-primary mb-2 mt-6;
+  }
+  
   h2 {
-    @apply font-league-gothic text-4xl text-primary mb-2 mt-6;
+    @apply font-league-gothic text-5xl text-primary mb-2 mt-6;
   }
   
   h3 {
-    @apply font-league-gothic text-3xl text-primary mb-2 mt-6;
+    @apply font-league-gothic text-4xl text-primary mb-2 mt-6;
   }
   
   h4 {
+    @apply font-league-gothic text-3xl text-primary mt-4;
+  }
+  
+  h5 {
+    @apply font-league-gothic text-2xl text-primary mt-4;
+  }
+  
+  h6 {
     @apply font-league-gothic text-2xl text-primary mt-4;
   }
 
@@ -107,6 +186,6 @@ ol {
   }
 
   pre {
-    @apply bg-secondary-400 p-4 rounded overflow-x-auto my-6;
+    @apply bg-codeblock p-4 rounded overflow-x-auto my-6;
   }
 }

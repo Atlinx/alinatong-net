@@ -26,20 +26,23 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div v-if="article" class="max-w-2xl mx-auto">
+  <div v-if="article" class="max-w-5xl mx-auto">
     <div class="flex mb-8">
         <NuxtLink class="link icon-btn" to="/blog"><Icon name="mdi:arrow-left" size="18"/> back</NuxtLink>
     </div>
-    <article>
-      <header class="mb-8 block">
-        <h2 class="font-league-gothic text-6xl mb-2 text-primary ">{{ article.title }}</h2>
-        <p v-if="article.description" class="text-primary mb-2">{{ article.description }}</p>
-        <time v-if="article.date" class="tag-outline">{{ article.date }}</time>
-      </header>
-      
-      <div v-if="article.body">
-        <ContentRenderer :value="article" class="content-renderer" prose />
-      </div>
-    </article>
+    <div class="flex gap-12">
+      <article class="min-w-0 flex-1">
+        <header class="mb-8 block">
+          <h2 class="font-league-gothic text-6xl mb-2 text-primary ">{{ article.title }}</h2>
+          <p v-if="article.description" class="text-primary mb-2">{{ article.description }}</p>
+          <time v-if="article.date" class="tag-outline">{{ article.date }}</time>
+        </header>
+        
+        <div v-if="article.body">
+          <ContentRenderer :value="article" class="content-renderer" prose />
+        </div>
+      </article>
+      <ATableOfContents v-if="article.body?.toc?.links?.length" :toc="article.body.toc" class="sticky hidden md:block" />
+    </div>
   </div>
 </template>
