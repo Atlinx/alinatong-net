@@ -65,7 +65,18 @@ export default defineNuxtConfig({
       icons: [
         "mdi:arrow-left",
         "mdi:arrow-top-right",
-        "mdi:arrow-top"
+        "mdi:arrow-top",
+        "mdi:information",
+        "mdi:check-circle",
+        "mdi:alert",
+        "mdi:alert-circle-outline",
+        "mdi:alert-circle",
+        "mdi:white-balance-sunny",
+        "mdi:weather-night",
+        "mdi:circle-half-full",
+        "mdi:palette",
+        "mdi:close",
+        "mdi:menu"
       ]
     }
   },
