@@ -60,3 +60,7 @@ function scrollToTop() {
     </div>
   </div>
 </template>
+
+<style>
+@import "~/assets/css/blog.css";
+</style>

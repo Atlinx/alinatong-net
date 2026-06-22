@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import "core.css";
+@import "katex/dist/katex.min.css";
+
+.content-renderer {
+  /* ----- General ----- */
+
+  p:has(+ p) {
+    @apply mb-4;
+  }
+  
+  h1 {
+    @apply font-league-gothic text-6xl text-primary mb-2 mt-6;
+  }
+  
+  h2 {
+    @apply font-league-gothic text-5xl text-primary mb-2 mt-6;
+  }
+  
+  h3 {
+    @apply font-league-gothic text-4xl text-primary mb-2 mt-6;
+  }
+  
+  h4 {
+    @apply font-league-gothic text-3xl text-primary mt-4;
+  }
+  
+  h5 {
+    @apply font-league-gothic text-2xl text-primary mt-4;
+  }
+  
+  h6 {
+    @apply font-league-gothic text-2xl text-primary mt-4;
+  }
+
+  blockquote {
+    @apply border-l-4 border-primary pl-4 py-2 italic my-6;
+  }
+
+  pre {
+    @apply bg-codeblock p-4 rounded overflow-x-auto my-6;
+  }
+
+  /* ----- Footnotes ----- */
+
+  /* Horizontal rule above the footnotes section */
+  [data-footnotes] {
+    @apply mt-12 pt-6 border-t-2 border-secondary-200;
+    
+    ol {
+      @apply list-decimal pl-6 text-sm text-secondary-300;
+      li {
+        @apply mb-2 pl-2;
+      }
+      li::marker {
+        @apply font-bold;
+      }
+    }
+   
+    /* Footnote back-link (the ↩ arrow that returns to the citation) */
+    .data-footnote-backref {
+      @apply text-primary hover:bg-primary hover:text-secondary-100 font-medium px-1;
+    }
+  }
+
+  /* Inline superscript citation links */
+  sup a[data-footnote-ref] {
+    @apply text-primary hover:bg-primary hover:text-secondary-100 font-bold p-0.5 scroll-mt-24;
+  }
+}

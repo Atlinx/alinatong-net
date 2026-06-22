@@ -1,0 +1,135 @@
+/* 
+This is the CSS necessary for the initial page load.
+
+Keep as small as possible to minimize the First Contentful Paint time.
+*/
+@import "tailwindcss";
+
+@source "../../../content";
+
+@theme {
+  --font-league-gothic: "League Gothic", sans-serif;
+  --font-ubuntu: "Ubuntu", sans-serif;
+  
+  --breakpoint-xs: 30rem;
+  
+  --color-primary: #ed0074;
+  --color-secondary-100: #e6e6e6;
+  --color-secondary-150: #d6d6d6;
+  --color-secondary-200: #bbbbbb;
+  --color-secondary-300: #75757a;
+  --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+  --color-success: #3fbe18;
+  --color-warning: #f3a909;
+  --color-error: #cd3131;
+}
+
+[data-theme="dark"] {
+  --color-primary: #ff6798;
+  --color-secondary-100: #202330;
+  --color-secondary-150: #3c4156;
+  --color-secondary-200: #646c8c;
+  --color-secondary-300: #949ab5;
+  --color-secondary-400: #c9cbd9;
+  --color-codeblock: #282b3b;
+}
+
+[data-theme="b&w"] {
+  --color-primary: #202330;
+  --color-secondary-100: #e6e6e6;
+  --color-secondary-150: #d6d6d6;
+  --color-secondary-200: #bbbbbb;
+  --color-secondary-300: #5f5f63;
+  --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+}
+
+[data-theme="purple"] {
+  --color-primary: #d670d6;
+  --color-secondary-100: #202330;
+  --color-secondary-150: #3c4156;
+  --color-secondary-200: #646c8c;
+  --color-secondary-300: #949ab5;
+  --color-secondary-400: #c9cbd9;
+  --color-codeblock: #282b3b;
+}
+
+[data-theme="purple2"] {
+  --color-primary: #30202c;
+  --color-secondary-100: #ec9dec;
+  --color-secondary-150: #cfa3cf;
+  --color-secondary-200: #937d93;
+  --color-secondary-300: #625262;
+  --color-secondary-400: #202330;
+  --color-codeblock: #202330;
+  --color-success: #2c7b14;
+  --color-warning: rgb(167, 121, 22);
+  --color-error: #b81515;
+}
+
+[data-theme="arctic"] {
+  --color-primary: #46d0f3;
+  --color-secondary-100: #202330;
+  --color-secondary-150: #3c4156;
+  --color-secondary-200: #646c8c;
+  --color-secondary-300: #949ab5;
+  --color-secondary-400: #c9cbd9;
+  --color-codeblock: #282b3b;
+}
+
+[data-theme="sandstone"] {
+  --color-primary: #f49230;
+  --color-secondary-100: #352f2f;
+  --color-secondary-150: #574444;
+  --color-secondary-200: #8c6964;
+  --color-secondary-300: #b59c94;
+  --color-secondary-400: #d9c9c9;
+  --color-codeblock: #423939;
+}
+
+html {
+  @apply scrollbar-thumb-secondary-200 scrollbar-thin scroll-pt-6;
+}
+
+.ul {
+  @apply ml-8 list-outside list-disc;
+}
+
+.ol {
+  @apply ml-8 list-outside list-decimal;
+}
+
+.link {
+  @apply underline text-primary hover:bg-primary hover:text-secondary-100 font-medium px-1;
+}
+
+.btn {
+  @apply no-underline outline outline-1 px-2 text-primary hover:bg-primary hover:text-secondary-100 font-medium;
+}
+
+.btn-round {
+  @apply h-10 w-10 flex items-center justify-center text-primary hover:bg-primary hover:text-secondary-100 rounded-full active:text-primary active:bg-transparent;
+}
+
+.highlight-text {
+  @apply inline font-bold bg-primary p-1 text-secondary-100 box-decoration-clone;
+}
+
+.icon-btn {
+  @apply flex flex-row flex-nowrap items-center gap-1 px-1;
+}
+
+.tag-outline {
+  @apply text-xs text-primary outline-1 outline-primary rounded-full px-2 py-0.5;
+}
+
+.bg-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-secondary-100),
+    var(--color-secondary-100) 16px,
+    var(--color-secondary-200) 16px,
+    var(--color-secondary-200) 32px
+  );
+}

@@ -6,5 +6,6 @@
                 <slot />
             </main>
         </div>
+        <ALightboxOverlay />
     </div>
 </template>

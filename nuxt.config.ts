@@ -4,17 +4,13 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: [
-    "@nuxt/fonts",
-    "@nuxt/image",
-    "@nuxtjs/color-mode",
-    "@nuxt/content",
-    "@nuxt/icon",
-    "nuxt-booster"
-  ],
+  modules: ["@nuxt/fonts", "@nuxt/image", "@nuxtjs/color-mode", "@nuxt/content", "@nuxt/icon"],
   colorMode: {
     classSuffix: "",
     dataValue: "theme"
+  },
+  features: {
+    inlineStyles: false
   },
   app: {
     head: {
@@ -52,9 +48,11 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
-  css: ["~/assets/css/tailwind.css", "katex/dist/katex.min.css"],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      cssCodeSplit: true,
+    },
     server: {
       allowedHosts: ['atlinx.net']
     }

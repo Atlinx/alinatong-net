@@ -57,11 +57,17 @@ function toggle_theme() {
         <div class="flex items-center gap-2 z-20">
           <button
             type="button"
-            class="inline-flex h-10 w-10 items-center justify-center text-primary hover:bg-primary hover:text-secondary-100 rounded-full active:text-primary active:bg-transparent"
+            class="btn-round"
             :aria-label="`Current theme: ${active_theme}. Switch to ${next_theme} mode`"
             @click="toggle_theme"
           >
             <ClientOnly>
+              <template #fallback>
+                <Icon
+                name="mdi:white-balance-sunny"
+                size="22"
+                />
+              </template>
               <Icon
                 name="mdi:white-balance-sunny"
                 :class="{

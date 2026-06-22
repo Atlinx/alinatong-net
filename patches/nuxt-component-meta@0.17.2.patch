@@ -1,0 +1,13 @@
+diff --git a/dist/module.mjs b/dist/module.mjs
+index 7f51e0d51a218eaa7ab4cbcb46ed1c05e1f4bc34..a0f16a212eb12bc7893c9012c059d88a91651920 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -446,7 +446,7 @@ function useComponentMetaParser({
+       if (isExcluded(component2)) {
+         continue;
+       }
+-      if (!component2.filePath || !component2.pascalName) {
++      if (!component2.filePath || !component2.pascalName || !component2.filePath.endsWith('.vue')) {
+         continue;
+       }
+       const filePath = resolvePathSync(component2.filePath);

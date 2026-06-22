@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { getPostSlug } from '~/composables/getPostSlug'
 
-const { data: posts } = await useAsyncData("blog", () => {
-return queryCollection("blog").all();
+const parsePostDate = (value?: string) => {
+    if (!value) return Number.MAX_VALUE;
+
+    return new Date(value).getTime();
+};
+
+const { data: posts } = await useAsyncData("blog", async () => {
+    const items = await queryCollection("blog").all();
+    return items.sort((a, b) => parsePostDate(b.date) - parsePostDate(a.date));
 });
 </script>
 <template>
@@ -22,7 +29,7 @@ return queryCollection("blog").all();
                     <h2>
                         <span class="highlight-text">{{ post.title }}</span>
                     </h2>
-                    <time class="tag-outline">{{ post.date }}</time>
+                    <time class="tag-outline" v-if="post.date">{{ post.date }}</time>
                     <p>{{ post.description }}</p>
                 </div>
                 <div class="flex">

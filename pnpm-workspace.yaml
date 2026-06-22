@@ -3,6 +3,8 @@ allowBuilds:
   better-sqlite3: true
   esbuild: true
   sharp: true
+patchedDependencies:
+  nuxt-component-meta@0.17.2: patches/nuxt-component-meta@0.17.2.patch
 publicHoistPattern:
   - remark-gfm
   - remark-emoji
