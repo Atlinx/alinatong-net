@@ -1,12 +1,50 @@
 <script setup lang="ts">
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+
 const { activeSrc, activeCaption, activeAttrs, close } = useLightbox()
+
+const isHeightConstrained = ref(false)
+// 1. Guard state to prevent showing the asset before dimensions are computed
+const isReady = ref(false)
+
+function calculateConstraints() {
+  const img = document.querySelector('.lightbox-img') as HTMLImageElement
+  if (!img || !img.naturalWidth || !img.naturalHeight) return
+
+  const imageRatio = img.naturalWidth / img.naturalHeight
+  const maxAvailableWidth = window.innerWidth * 0.85
+  const maxAvailableHeight = window.innerHeight * 0.70
+  const viewportRatio = maxAvailableWidth / maxAvailableHeight
+
+  isHeightConstrained.value = imageRatio < viewportRatio
+  
+  // 2. Dimensions are locked in—reveal the image safely!
+  isReady.value = true
+}
+
+function onImageLoad() {
+  calculateConstraints()
+}
+
+// Reset states instantly whenever a new image source is triggered
+watch(activeSrc, () => {
+  isReady.value = false
+  isHeightConstrained.value = false
+})
 
 function onKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') close()
 }
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+  window.addEventListener('resize', calculateConstraints)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKeydown)
+  window.removeEventListener('resize', calculateConstraints)
+})
 </script>
 
 <template>
@@ -14,45 +52,43 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     <Transition name="lightbox">
       <div
         v-if="activeSrc"
-        class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-secondary-100/70 p-8"
+        class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-secondary-100/80 p-8"
         @click.self="close"
       >
-        <button
-          class="absolute top-4 right-4 btn-round"
-          @click="close"
-          aria-label="Close preview"
+        <div 
+          class="relative flex flex-col gap-4 items-end w-fit h-fit max-w-full max-h-full transition-opacity duration-200"
+          :class="isReady ? 'opacity-100' : 'opacity-0'"
         >
-          <Icon 
-            name="mdi:close"
-            size="22" />
-        </button>
-        <div class="flex flex-col max-w-full outline-primary outline-2">
-          <img
-            v-bind="activeAttrs"
-            :src="activeSrc"
-            class="max-w-full max-h-[85vh] object-contain"
-          />
-          <p
-            v-if="activeCaption"
-            class="p-4 text-sm text-secondary-300 text-center w-full bg-secondary-100"
+          <button
+            class="btn-round shrink-0"
+            @click="close"
+            aria-label="Close preview"
           >
-            <span class="max-w-2xl">
-              {{ activeCaption }}
-            </span>
-          </p>
+            <Icon 
+              name="mdi:close"
+              size="22" />
+          </button>
+          
+          <div class="flex flex-col w-fit h-fit outline-primary outline-2 bg-secondary-100 items-center overflow-hidden">
+            <img
+              v-bind="activeAttrs"
+              :src="activeSrc"
+              @load="onImageLoad"
+              class="lightbox-img p-4 pb-0 object-contain block"
+              :class="isHeightConstrained ? 'h-[65vh] lg:h-[70vh] w-auto' : 'w-[90vw] md:w-[85vw] h-auto'"
+            />
+            
+            <p
+              v-if="activeCaption"
+              class="shrink-0 p-2 sm:p-4 text-sm w-full text-secondary-300 text-center"
+            >
+              <span class="max-w-2xl block mx-auto break-words">
+                {{ activeCaption }}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </Transition>
   </Teleport>
 </template>
-
-<style scoped>
-.lightbox-enter-active,
-.lightbox-leave-active {
-  transition: opacity 0.2s ease;
-}
-.lightbox-enter-from,
-.lightbox-leave-to {
-  opacity: 0;
-}
-</style>

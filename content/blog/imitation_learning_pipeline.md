@@ -17,7 +17,12 @@ sdfsdf[^2]
 
 [^2]: Ross, S., Gordon, G., & Bagnell, D. (2011). *AISTATS*.
 
-::img{src="/svgs/imitation_learning_ros.svg" caption="My image" class=" bg-white"}
+::img
+---
+src: /svgs/imitation_learning_ros.svg 
+caption: ROS node architecture. Dotted boxes represent a common interface/API.
+class: bg-white
+---
 
 ::admonition{title="Info!" type="info"}
 This is an info admonition. You can use **bold text** or lists inside here.

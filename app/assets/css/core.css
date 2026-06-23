@@ -5,7 +5,7 @@ Keep as small as possible to minimize the First Contentful Paint time.
 */
 @import "tailwindcss";
 
-@source "../../../content";
+@source "../../../content/**/*.md";
 
 @theme {
   --font-league-gothic: "League Gothic", sans-serif;

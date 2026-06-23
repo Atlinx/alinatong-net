@@ -15,7 +15,7 @@ const caption = computed(() => props.caption || (attrs.alt as string | undefined
   <figure class="my-6">
     <NuxtImg
       v-bind="attrs"
-      class="cursor-zoom-in"
+      class="cursor-zoom-in m-auto"
       @click="open(attrs.src as string, caption, attrs)"
     />
     <figcaption
