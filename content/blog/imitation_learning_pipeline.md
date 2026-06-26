@@ -46,7 +46,7 @@ ROS node architecture. Dotted boxes [represent](https://google.com) a common int
 
 ### Real Nodes
 
-Every piece of hardware in ROS — from ZED M cameras to the SDA10F — comes with its own ROS node that handles the low-level driver communication required to fetch images from a camera or control a joint on a robot. The "API" of a ROS node can be seen as the topics and services that it publishes. These `Real Nodes` aren't standardized and expose a variety of different APIs.
+Every piece of hardware in ROS — from ZED Mini cameras to the SDA10F — comes with its own ROS node that handles the low-level driver communication required to fetch images from a camera or control a joint on a robot. The "API" of a ROS node can be seen as the topics and services that it publishes. These `Real Nodes` aren't standardized and expose a variety of different APIs.
 
 ::admonition{title="Example" type="info"}
 Since the Motoman SDA10F is a dual-arm robot, its underlying driver treats each arm as a separate "robot group." And despite each arm sharing the same base joint, the base joint itself for each arm is treated as a separate "robot group." 
@@ -98,7 +98,18 @@ muted: true
 loop: true
 loading: lazy
 ---
-Teleoperation using a 3D-printed [GELLO](https://wuphilipp.github.io/gello_site/) controller.
+Teleoperation on a real Ur5e robot using a 3D-printed [GELLO](https://wuphilipp.github.io/gello_site/) controller.
+::
+
+::prose-video
+---
+src: /videos/keyboard_teleop.mp4
+controls: true
+muted: true
+loop: true
+loading: lazy
+---
+Teleoperation on a simulated Motoman SDA10F robot using a keyboard + mouse.
 ::
 
 ### Data Collection
