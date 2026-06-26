@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const email_address = useState("email_address", () => "");
 function reveal_email() {
-    email_address.value = atob("YWxpbmF0QHNlYXMudXBlbm4uZWR1");
+    email_address.value = atob("YWxpbmF0QGVuZ2luZWVyaW5nLnVwZW5uLmVkdQ==");
 }
 const last_updated = new Date("2026-6-15 12:08 PM EST")
 </script>

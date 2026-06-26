@@ -3,9 +3,16 @@ title: Imitation Learning Pipeline
 description: |
     Summary of the software engineering behind building an 
     imitation learning infrastructure for the Pracsys Lab.
-preview: /images/zero-shot_transfer.webp
+preview: /images/cube_stack.webp
 date: 8/31/2025
 ---
+
+::prose-img
+---
+src: /images/cube_stack.webp
+class: w-full h-[16rem] object-cover
+---
+::
 
 During my research assistantship at the Pracsys Lab during the summer of 2025, there was growing interest in imitation learning and large-scale VLA models. However, our lab lacked the infrastructure to collect data and deploy these policies on our robots. I volunteered to build this pipeline so we could conduct experiments with the new VLA models.
 
@@ -89,13 +96,14 @@ class: h-[32rem]
 controls: true
 muted: true
 loop: true
+loading: lazy
 ---
 Teleoperation using a 3D-printed [GELLO](https://wuphilipp.github.io/gello_site/) controller.
 ::
 
 ### Data Collection
 
-Finally, a `Data Collector Node` collects all the information —  robot joint states, camera images, and teleop joint commands — and sends it to a `Data Writer` process, which writes the data to disk in a specific format.
+Finally, a `Data Collector Node` collects all the information —  robot joint states, camera images, and teleop joint commands — and sends it to a `Data Writer` process, which writes the data to disk in a specific format ([LeRobot](https://github.com/huggingface/lerobot/), Hdf5, etc.). Each run or "episode" is a single action, such as stacking a pile of cubes or closing a drawer.
 
 ::admonition{title="Note" type="info"}
 The `Data Writer` is not a ROS node but rather a separate python process that uses ZMQ sockets. Due to using Ubuntu 20.04 and ROS Noetic, we are forced to use Python 3.8 for ROS. However, many Python libraries only work with newer Python versions.
@@ -103,16 +111,42 @@ The `Data Writer` is not a ROS node but rather a separate python process that us
 Therefore, I moved the data writing code to a separate process to support data writers that use different python versions.
 ::
 
-## Tooling
+::prose-video
+---
+src: /videos/cube_stack.webm
+class: h-auto
+controls: true
+muted: true
+loop: true
+loading: lazy
+---
+Data collection in simulation using a GELLO arm.
+::
 
-Aside from the ROS architecture
+To better visualize our data, I wrote a script that can load an episode into [rerun.io](https://github.com/rerun-io/rerun). These replays can help us diagnose what happened during a run — especially when we're collecting several experiments in simulation. 
+
+::prose-video
+---
+src: /videos/rerun.webm
+class: h-auto
+controls: true
+muted: true
+loop: true
+loading: lazy
+---
+Reviewing collected data inside rerun. 
+::
+
+## Additional Bits
+
+Aside from the core ROS architecture, these are the most important pieces of code I wrote for the project.
 
 ### Robot Config
 
 Inside the `robot_config.py` script holds a dictionary of different robot configurations. Each robot configuration included joint, mujoco, gripper, and camera information. 
 
 Each ROS node that needs robot specific information can then load a configuration from a name passed into its CLI.
-
+ 
 ::admonition{title="Example" type="info"}
 A keyboard_teleop node that wants to load the `motoman` config and control its first arm would run the following:
 
@@ -121,18 +155,34 @@ keyboard_teleop.py motoman 0
 ```
 ::
 
-### `setup.sh`
+### `run_ros.py`
 
-sdfsdfsdf
+This script reads a `.yaml` ROS config file that specifies a list of commands to run, and then runs the commands in a single [tmux](https://github.com/tmux/tmux/wiki) session with different tmux windows. The `.yaml` config file can also define variables that are substituted into the commands for more dynamic behaviors. 
 
-### MuJoCo Hot Reload
+### `ws_install.sh`
 
-sdfsdfsdf
+This script installs the entire workspace onto a new Ubuntu 20.04 computer. It automatically installs required dependencies if they aren't present.
+
+### `hotreload.py`
+
+This script opens a MuJoCo scene xml file in a MuJoCo viewer and hot-reloads the viewer whenever the scene xml is changed.
 
 ## Lessons
 
-1. **Understand Your Hardware**
-2. **Maintain Setup Scripts**
-   - 
-3. **Simplify Further**
-   - My choice to replicate an existing hardware API added additional complexity 
+After finishing this project, I had the following takeaways
+
+1. **Understand Your Hardware — Document Everything!**
+   - There will inevitably come a time when the robot throws an error in its pendant and it's up to you to trace down a fix. Especially for older/niche robots (like the Motoman SDA10F), online discourse and troubleshooting resources are limited. 
+   - After encountering several unique errors on the Motoman that took days to troubleshoot, I created a `motoman/documentation` folder in the repository that stored manuals for the Motoman SDA10F robot, the FS100 controller, the Robotiq 2f-85 gripper, and the Robotiq universal controller. Additionally, I wrote a `README.md` file that documents basic operation of the robot, manually controlling through the pendant, robot joint calibration, and steps for resolving specific errors that may occur on the pendant. By documenting your hardware, the next grad-student who's inheriting the robot will have an easier time working with it.
+2. **Quality of Life Matters**
+   - Small scripts can make a big difference in maintaining cleaner workspace and working with our physics simulator.
+   - Keeping our `ws_install.sh` script not only makes it easy to rebuild the repository if something breaks, but also makes it easy to on-board new undergraduates onto the repository.
+   - The `hotreload.py` script brought a "web-dev" like experience of live editing to MuJoCo, and made it faster to build scenes by hand.
+   - The `run_ros.py` script created a standard way to define ROS node networks, allowing us to build different configs for simulation and real environments.
+3. **Simplify, Simplify**
+   - While ROS nodes serve as a useful framework for splitting code, too many nodes can slow down performance and hog CPU time due to the overhead of forwarding messages and running multiple processes.
+   - My choice to replicate an existing hardware API in sim — while making it easier to test the interface classes — added additional complexity and computational overhead. A simpler architecture would have the simulation nodes follow the standard `Robot Interface` API.
+
+## Closing
+
+This project was my first shot at building a ROS infrastructure from scratch. Coming in with no background in robotics, I've quickly learned new software like ROS, RViz, and MuJoCo, and gained experience in designing modular ROS nodes. I'm looking forward to applying these skills to my next project.
