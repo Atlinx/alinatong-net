@@ -33,7 +33,7 @@ const typeClasses: Record<NonNullable<typeof props.type>, {
     </p>
 
     <div class="text-secondary-400">
-      <slot mdc-unwrap="p" />
+      <slot />
     </div>
   </aside>
 </template>

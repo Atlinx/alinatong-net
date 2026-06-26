@@ -7,46 +7,132 @@ preview: /images/zero-shot_transfer.webp
 date: 8/31/2025
 ---
 
-## Imitation Learning?
+During my research assistantship at the Pracsys Lab during the summer of 2025, there was growing interest in imitation learning and large-scale VLA models. However, our lab lacked the infrastructure to collect data and deploy these policies on our robots. I volunteered to build this pipeline so we could conduct experiments with the new VLA models.
 
-sdfsdf[^1]
+## Goals
 
-sdfsdf[^2]
+Our existing robot software stack is built around our Motoman SDA10F robot and is designed for open-loop control. However, it was placed in a Catkin workspace with several unused packages, files, and scripts — making difficult to understand. It also ran on Ubuntu 20.04 and ROS Noetic — both older software versions. We also had access to another lab's Ur5e robot, but it had never been used before.
 
-[^1]: Ross, S., Gordon, G., & Bagnell, D. (2011). *AISTATS*.
+My goal for the new infrastructure was as follows:
 
-[^2]: Ross, S., Gordon, G., & Bagnell, D. (2011). *AISTATS*.
+1. **Clarity**
+     - The ROS workspace should have a minimal set of packages and code. Additional unused packages add mental load to learning how the project works.
+     - Code should be self-documenting, or contain comments to explain specific implementations quirks.
+2. **Flexibility**
+     - Standard APIs should be used whenever possible, to avoid locking code into a specific robot, software library, or implementation.
+3. **Reuse**
+     - The workspace should run on the same Ubuntu and ROS versions as the old code to reuse existing packages whenever possible.
+       - Since the SDA10F teleoperation code depends on now deprecated libraries, I wanted to avoid upgrading ROS because that would entail re-implementing these libraries. Reusing existing code that's proven to work would therefore minimize the amount of time taken to implement a feature.
 
-::img
+## ROS Design
+
+With these goals in mind, I designed and implemented the following ROS node infrastructure:
+
+::prose-img
 ---
 src: /svgs/imitation_learning_ros.svg 
-caption: ROS node architecture. Dotted boxes represent a common interface/API.
 class: bg-white
 ---
-
-::admonition{title="Info!" type="info"}
-This is an info admonition. You can use **bold text** or lists inside here.
+ROS node architecture. Dotted boxes [represent](https://google.com) a common interface/API.
 ::
 
-$$
-a = 10 + \int_0^1 \lim_{x \to \infty} \dfrac{x}{7} dx
-$$
 
-```python
-def my_func():
-    print("test")
+### Real Nodes
 
-if __name__ == "__main__":
-    my_func()
+Every piece of hardware in ROS — from ZedM cameras to the SDA10F — comes with its own ROS node that handles the low-level driver communication required to fetch images from a camera, or control a joint on a robot. The "API" of a ROS Node can be seen as the topics and services that it publishes. These `Real Nodes` aren't standardized and exposed a variety of different APIs.
+
+::admonition{title="Example" type="info"}
+Since the Motoman SDA10F is a dual-arm robot, it's underlying driver treats each arm as separate "robot groups". And despite each arm sharing the same base joint, the base joint itself for each arm is treated as separate "robot groups". 
+
+Therefore the Motoman ROS node publishes to **four** joint states topics.
+::
+
+### Robot Interface
+
+While we could modify the source code of the real nodes to standardize their API, that would make the library code-base more fragile to upstream changes from the original authors. Therefore, `Robot Interface Nodes` were created to convert their non-standard ROS node API to a standard API.
+
+- All robots
+  - Published their current joint states to a `/ROBOT_NAME/joint_states` topic
+  - Listened to a `/teleop/joint_states` to control its joint positions
+- All cameras published their RGB and depth images to `/CAMERA_NAME/rgb` and `/CAMERA_NAME/depth` topics
+
+::admonition{title="Example" type="info"}
+These interfaces sometimes have to do non-trival conversions, such as in the case of the `Motoman Interface Node`. Due to how the underlying Motoman driver works, the `Real Motoman Node` has a joint streaming quirk where any joint command sent during streaming cannot be interrupted. 
+
+Joint commands are also published with a duration that the movement should take, and the underlying driver then moves to the new joint states over the specified duration. If joint commands are sent faster than Motoman can consume, it can create a backlog that can eventually overflow the Motoman driver's internal queue.
+
+Therefore, the interface node has to publish joint commands at the rate the driver is following the commands, by checking if the current joint state is within a specific tolerance to the target joint state.
+
+This is just one example of a motoman driver quirk. Small hardware-specific behaviors like theses required additional code to coerce into our standardized API.
+::
+
+### Robot Sim
+
+To support collecting data and deploying policies in simulation, I used the open-source [MuJoCo](https://github.com/google-deepmind/mujoco) physics engine. Since we had existing code and digital models built for SDA10F in MuJoCo, this was the easiest simulator to use.
+
+I created a `MuJoCo Sim Node` that simulates a scene and exposes a ROS API for interacting with it. It publishes topics for joint states and camera images, while listening to topic for joint controls.
+
+Then simulated versions of the hardware nodes were created that exposed the same API as their underlying hardware but used the MuJoCo Sim under the hood. By replicating the existing hardware API, I could test `Robot Interface` nodes in simulation prior to deploying on the real robot.
+
+::admonition{title="Example" type="info"}
+The `Motoman Sim Node` would expose the four joint states topics that the real Motoman node used, as well as the ROS services for controlling joint streaming. This joint streaming followed the non-interruptable and duration-driven behavior as the real robot, and replica was especially useful in testing our `Motoman Interface Node` implementation.
+::
+
+### Teleoperation
+
+To publish the joint commands for the robot, I built `Teleop Nodes`. These nodes publish to `/teleop/joint_states`, which is the same topic that `Robot Interface Nodes` consume. Teleop nodes can represent human input (keyboard, GELLO, etc.), or a deployed policy running inference ($\pi_0$, etc).
+
+::prose-video
+---
+src: /videos/gello.mp4
+class: h-[32rem]
+controls: true
+muted: true
+loop: true
+---
+Teleoperation using a 3D-printed [GELLO](https://wuphilipp.github.io/gello_site/) controller.
+::
+
+### Data Collection
+
+Finally, a `Data Collector Node` collects all the information —  robot joint states, camera images, and teleop joint commands — and sends it to a `Data Writer` process, which writes the data to disk in a specific format.
+
+::admonition{title="Note" type="info"}
+The `Data Writer` is not a ROS node but rather a separate python process that uses ZMQ sockets. Due to using Ubuntu 20.04 and ROS Noetic, we are forced to use Python 3.8 for ROS. However, many Python libraries only work with newer Python versions.
+
+Therefore, I moved the data writing code to a separate process to support data writers that use different python versions.
+::
+
+## Tooling
+
+Aside from the ROS architecture
+
+### Robot Config
+
+Inside the `robot_config.py` script holds a dictionary of different robot configurations. Each robot configuration included joint, mujoco, gripper, and camera information. 
+
+Each ROS node that needs robot specific information can then load a configuration from a name passed into its CLI.
+
+::admonition{title="Example" type="info"}
+A keyboard_teleop node that wants to load the `motoman` config and control its first arm would run the following:
+
 ```
+keyboard_teleop.py motoman 0
+```
+::
 
+### `setup.sh`
 
-## asdfasdfsdf
+sdfsdfsdf
 
-sdfsdf
+### MuJoCo Hot Reload
 
+sdfsdfsdf
 
-$$
-a = 10 + \int_0^1 \lim_{x \to \infty} \dfrac{x}{7} dx
-$$
+## Lessons
 
+1. **Understand Your Hardware**
+2. **Maintain Setup Scripts**
+   - 
+3. **Simplify Further**
+   - My choice to replicate an existing hardware API added additional complexity 

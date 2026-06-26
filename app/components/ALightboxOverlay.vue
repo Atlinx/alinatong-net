@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 
-const { activeSrc, activeCaption, activeAttrs, close } = useLightbox()
+const { activeSrc, activeCaption, activeAttrs, activeType, close } = useLightbox()
 
 const isHeightConstrained = ref(false)
-// 1. Guard state to prevent showing the asset before dimensions are computed
 const isReady = ref(false)
 
 function calculateConstraints() {
@@ -17,8 +16,6 @@ function calculateConstraints() {
   const viewportRatio = maxAvailableWidth / maxAvailableHeight
 
   isHeightConstrained.value = imageRatio < viewportRatio
-  
-  // 2. Dimensions are locked in—reveal the image safely!
   isReady.value = true
 }
 
@@ -26,7 +23,11 @@ function onImageLoad() {
   calculateConstraints()
 }
 
-// Reset states instantly whenever a new image source is triggered
+function onVideoLoaded() {
+  isReady.value = true
+}
+
+// Reset states whenever a new source is triggered
 watch(activeSrc, () => {
   isReady.value = false
   isHeightConstrained.value = false
@@ -71,21 +72,31 @@ onUnmounted(() => {
           
           <div class="flex flex-col w-fit h-fit outline-primary outline-2 bg-secondary-100 items-center overflow-hidden">
             <img
+              v-if="activeType === 'image'"
               v-bind="activeAttrs"
               :src="activeSrc"
               @load="onImageLoad"
               class="lightbox-img p-4 pb-0 object-contain block"
               :class="isHeightConstrained ? 'h-[65vh] lg:h-[70vh] w-auto' : 'w-[90vw] md:w-[85vw] h-auto'"
             />
+            <video
+              v-else
+              v-bind="activeAttrs"
+              :src="activeSrc"
+              controls
+              @loadedmetadata="onVideoLoaded"
+              class="p-4 pb-0 object-contain block max-h-[70vh] max-w-[90vw] md:max-w-[85vw]"
+            />
             
-            <p
+            <div
               v-if="activeCaption"
               class="shrink-0 p-2 sm:p-4 text-sm w-full text-secondary-300 text-center"
             >
-              <span class="max-w-2xl block mx-auto break-words">
-                {{ activeCaption }}
-              </span>
-            </p>
+              <span
+                class="max-w-2xl block mx-auto wrap-break-word [&>a]:link content-renderer"
+                v-html="activeCaption"
+              />
+            </div>
           </div>
         </div>
       </div>

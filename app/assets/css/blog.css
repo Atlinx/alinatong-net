@@ -2,6 +2,8 @@
 @import "core.css";
 @import "katex/dist/katex.min.css";
 
+@source "../../../content/**/*.md";
+
 .content-renderer {
   /* ----- General ----- */
 
@@ -11,26 +13,50 @@
   
   h1 {
     @apply font-league-gothic text-6xl text-primary mb-2 mt-6;
+
+    code {
+      @apply text-4xl;
+    }
   }
   
   h2 {
     @apply font-league-gothic text-5xl text-primary mb-2 mt-6;
+
+    code {
+      @apply text-3xl;
+    }
   }
   
   h3 {
     @apply font-league-gothic text-4xl text-primary mb-2 mt-6;
+
+    code {
+      @apply text-2xl;
+    }
   }
   
   h4 {
     @apply font-league-gothic text-3xl text-primary mt-4;
+
+    code {
+      @apply text-xl;
+    }
   }
   
   h5 {
     @apply font-league-gothic text-2xl text-primary mt-4;
+
+    code {
+      @apply text-lg;
+    }
   }
   
   h6 {
     @apply font-league-gothic text-2xl text-primary mt-4;
+
+    code {
+      @apply text-lg;
+    }
   }
 
   blockquote {
@@ -38,7 +64,29 @@
   }
 
   pre {
-    @apply bg-codeblock p-4 rounded overflow-x-auto my-6;
+    @apply bg-codeblock text-codeblock-fg p-4 rounded overflow-x-auto my-6;
+  }
+
+  code:not(pre code) {
+    @apply bg-codeblock text-codeblock-fg py-0.5 px-2 rounded;
+  }
+
+  a {
+    @apply underline text-primary hover:bg-primary hover:text-secondary-100 font-medium px-1;
+  }
+
+  /* ----- Lists ----- */
+
+  ol {
+    @apply list-decimal pl-6 my-4;
+  }
+
+  ul {
+    @apply list-disc pl-6 my-4;
+  }
+
+  li {
+    @apply mb-2 pl-1;
   }
 
   /* ----- Footnotes ----- */

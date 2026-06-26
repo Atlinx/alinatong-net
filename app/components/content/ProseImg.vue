@@ -3,12 +3,11 @@ defineOptions({ inheritAttrs: false })
 
 const attrs = useAttrs()
 const { open } = useLightbox()
+const figcaptionRef = ref<HTMLElement>()
 
-const props = defineProps<{
-  caption?: string
-}>()
-
-const caption = computed(() => props.caption || (attrs.alt as string | undefined))
+function onImageClick() {
+  open(attrs.src as string, figcaptionRef.value?.innerHTML, attrs)
+}
 </script>
 
 <template>
@@ -16,13 +15,14 @@ const caption = computed(() => props.caption || (attrs.alt as string | undefined
     <NuxtImg
       v-bind="attrs"
       class="cursor-zoom-in m-auto"
-      @click="open(attrs.src as string, caption, attrs)"
+      @click="onImageClick"
     />
     <figcaption
-      v-if="caption"
+      ref="figcaptionRef"
+      v-if="$slots.default"
       class="mt-2 text-sm text-center text-secondary-300"
     >
-      {{ caption }}
+      <slot />
     </figcaption>
   </figure>
 </template>

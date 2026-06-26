@@ -19,7 +19,8 @@ Keep as small as possible to minimize the First Contentful Paint time.
   --color-secondary-200: #bbbbbb;
   --color-secondary-300: #75757a;
   --color-secondary-400: #202330;
-  --color-codeblock: #202330;
+  --color-codeblock: #d6d6d6;
+  --color-codeblock-fg: var(--color-primary);
   --color-success: #3fbe18;
   --color-warning: #f3a909;
   --color-error: #cd3131;
@@ -43,6 +44,7 @@ Keep as small as possible to minimize the First Contentful Paint time.
   --color-secondary-300: #5f5f63;
   --color-secondary-400: #202330;
   --color-codeblock: #202330;
+  --color-codeblock-fg: var(--color-secondary-100);
 }
 
 [data-theme="purple"] {
@@ -66,6 +68,7 @@ Keep as small as possible to minimize the First Contentful Paint time.
   --color-success: #2c7b14;
   --color-warning: rgb(167, 121, 22);
   --color-error: #b81515;
+  --color-codeblock-fg: var(--color-secondary-100);
 }
 
 [data-theme="arctic"] {
