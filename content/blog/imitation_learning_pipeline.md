@@ -167,6 +167,19 @@ This script installs the entire workspace onto a new Ubuntu 20.04 computer. It a
 
 This script opens a MuJoCo scene xml file in a MuJoCo viewer and hot-reloads the viewer whenever the scene xml is changed.
 
+
+::prose-video
+---
+src: /videos/hotreload.mp4
+class: h-auto
+controls: true
+muted: true
+loop: true
+loading: lazy
+---
+Editing a scene with `hotreload.py`.
+::
+
 ## Lessons
 
 After finishing this project, I had the following takeaways
