@@ -3,6 +3,7 @@ import { computed, watchEffect } from 'vue'
 import { getPostSlug } from '~/composables/getPostSlug'
 
 const route = useRoute()
+const router = useRouter()
 const slug = route.params.slug as string
 
 // Query all blog articles and find by slug
@@ -34,9 +35,9 @@ function scrollToTop() {
     <div class="flex gap-12">
       <article class="min-w-0 flex-1">
         <div class="flex mb-4">
-          <NuxtLink class="link icon-btn" to="/blog">
+          <button class="link icon-btn" @click="router.back()">
             <Icon name="mdi:arrow-left" size="18" /> back
-          </NuxtLink>
+          </button>
         </div>
 
         <header class="mb-16 block">

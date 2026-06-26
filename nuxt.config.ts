@@ -74,7 +74,8 @@ export default defineNuxtConfig({
         "mdi:circle-half-full",
         "mdi:palette",
         "mdi:close",
-        "mdi:menu"
+        "mdi:menu",
+        "mdi:message-text"
       ]
     }
   },

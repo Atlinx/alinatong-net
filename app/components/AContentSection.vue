@@ -14,11 +14,20 @@
       "github": "mdi:github",
       "linkedin": "mdi:linkedin",
       "paper": "mdi:paper",
-      "website": "mdi:link"
+      "website": "mdi:link",
+      "blog": "mdi:message-text"
     }
     if (link_name && ICON_MAP[link_name])
       return ICON_MAP[link_name]
     return "mdi:arrow-top-right"
+  }
+  function link_target(link_name: string | undefined) {
+    const TARGET_MAP: Record<string, string> = {
+      "blog": "_self"
+    }
+    if (link_name && TARGET_MAP[link_name])
+      return TARGET_MAP[link_name]
+    return "_blank"
   }
 </script>
 
@@ -80,7 +89,7 @@
                 </div>
                 <div class="flex flex-row gap-4 mt-1" v-if="project.links">
                   <NuxtLink
-                    target="_blank"
+                    :target="link_target(link[0])"
                     :to="link[1]"
                     v-for="link in (Object.entries(project.links) as any as [string, string])"
                     :key="link[0]"

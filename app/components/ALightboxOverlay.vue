@@ -8,9 +8,12 @@ const isReady = ref(false)
 
 function calculateConstraints() {
   const img = document.querySelector('.lightbox-img') as HTMLImageElement
-  if (!img || !img.naturalWidth || !img.naturalHeight) return
-
-  const imageRatio = img.naturalWidth / img.naturalHeight
+  if (!img) {
+    console.error("ALighboxOverlay: Unsupported image type or image not found")
+    return;
+  }
+  const rect = img.getBoundingClientRect();
+  const imageRatio = rect.width / rect.height
   const maxAvailableWidth = window.innerWidth * 0.85
   const maxAvailableHeight = window.innerHeight * 0.70
   const viewportRatio = maxAvailableWidth / maxAvailableHeight
@@ -20,6 +23,7 @@ function calculateConstraints() {
 }
 
 function onImageLoad() {
+  console.log("IMAGE LOADED")
   calculateConstraints()
 }
 
@@ -54,7 +58,7 @@ onUnmounted(() => {
       <div
         v-if="activeSrc"
         class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-secondary-100/80 p-8"
-        @click.self="close"
+        @click="close"
       >
         <div 
           class="relative flex flex-col gap-4 items-end w-fit h-fit max-w-full max-h-full transition-opacity duration-200"
@@ -76,7 +80,7 @@ onUnmounted(() => {
               v-bind="activeAttrs"
               :src="activeSrc"
               @load="onImageLoad"
-              class="lightbox-img p-4 pb-0 object-contain block"
+              class="lightbox-img p-4 object-contain block"
               :class="isHeightConstrained ? 'h-[65vh] lg:h-[70vh] w-auto' : 'w-[90vw] md:w-[85vw] h-auto'"
             />
             <video
@@ -85,12 +89,12 @@ onUnmounted(() => {
               :src="activeSrc"
               controls
               @loadedmetadata="onVideoLoaded"
-              class="p-4 pb-0 object-contain block max-h-[70vh] max-w-[90vw] md:max-w-[85vw]"
+              class="object-contain block max-h-[70vh] max-w-[90vw] md:max-w-[85vw]"
             />
             
             <div
               v-if="activeCaption"
-              class="shrink-0 p-2 sm:p-4 text-sm w-full text-secondary-300 text-center"
+              class="shrink-0 p-2 pt-0 sm:p-4 text-sm w-full text-secondary-300 text-center"
             >
               <span
                 class="max-w-2xl block mx-auto wrap-break-word [&>a]:link content-renderer"
