@@ -54,11 +54,11 @@ export default defineNuxtConfig({
       cssCodeSplit: true,
     },
     server: {
-      allowedHosts: ['atlinx.net']
+      allowedHosts: ["atlinx.net"]
     }
   },
   icon: {
-    mode: 'svg',
+    mode: "svg",
     clientBundle: {
       icons: [
         "mdi:arrow-left",
@@ -83,6 +83,11 @@ export default defineNuxtConfig({
     defaults: {
       preload: true,
     },
+    families: [
+      // Force a specific provider (e.g., download only from Google Fonts)
+      { name: "League Gothic", provider: "google"},
+      { name: "Ubuntu", provider: "google", weights: ["400", "500", "600", "700"] },
+    ]
   },
   router: {
     options: {
