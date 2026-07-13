@@ -11,6 +11,7 @@ Keep as small as possible to minimize the First Contentful Paint time.
   --font-league-gothic: "League Gothic", sans-serif;
   --font-ubuntu: "Ubuntu", sans-serif;
   
+  --breakpoint-xxs: 26rem;
   --breakpoint-xs: 30rem;
   
   --color-primary: #ed0074;
