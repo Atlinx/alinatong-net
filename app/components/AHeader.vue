@@ -38,7 +38,7 @@ function toggle_theme() {
 </script>
 
 <template>
-  <header class="w-full p-2 px-8 md:px-16 sticky top-0 left-0 right-0 z-10 bg-secondary-100 flex justify-center">
+  <header class="w-full p-2 px-4 xs:px-8 md:px-16 sticky top-0 left-0 right-0 z-10 bg-secondary-100 flex justify-center">
     <div class="w-full max-w-4xl">
       <div class="flex items-center justify-between gap-4">
         <NuxtLink class="link font-league-gothic text-3xl text-primary leading-none" to="/" @click="close_menu">alina tong</NuxtLink>

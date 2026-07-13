@@ -3,7 +3,7 @@ const email_address = useState("email_address", () => "");
 function reveal_email() {
     email_address.value = atob("YWxpbmF0QGVuZ2luZWVyaW5nLnVwZW5uLmVkdQ==");
 }
-const last_updated = new Date("2026-7-2 7:41 PM EST")
+const last_updated = new Date("2026-7-13 1:12 PM EST")
 </script>
 
 <template>
@@ -37,7 +37,7 @@ const last_updated = new Date("2026-7-2 7:41 PM EST")
                 </div>
             </div>
             <NuxtImg class="aspect-square max-w-full xs:max-w-sm sm:max-w-none sm:h-80 sm:w-60 md:h-80 md:w-80 object-cover max-sm:object-[100%_40%] border border-primary bg-primary text-secondary-100"
-                alt="Portrait of myself standing in front of a London skyline." src="/images/portrait.webp" densities="x1" />
+                alt="Photo of me standing in front of Bushkill Falls." src="/images/portrait_center.webp" densities="x1" />
         </div>
         <section id="research" class="scroll-mt-24">
             <LazyAContentSection collection="research" preview="show_stripes" />
